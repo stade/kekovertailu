@@ -33,9 +33,6 @@ public class MinBinaryheap {
     public int parent(int i) {
         double d = (double)i;
         d = Math.floor((d-1)/2);
-
-        System.out.println("parent was " + d);
-
         return (int)d;
 
     }
@@ -77,7 +74,7 @@ public class MinBinaryheap {
         }
     }
 
-    public int heapMin(int[] array) {
+    public int heapMin() {
         return array[0];
     }
     
@@ -86,36 +83,19 @@ public class MinBinaryheap {
         int i = 0;
 
         heapsize = heapsize+1;
-
-        
-
         i = heapsize;
-
         i= i-1;
-
         
         if (heapsize == 1) {
-
             array[0] = k;
-
         }
-
-
         else {
-        
-       
-            System.out.println("i = " + i + " and " + array[parent(i)] + " " + k + "" );
-        
-            while ((i > 0) && ((array[parent(i)]) > k)) {
-              
+            while ((i > 0) && ((array[parent(i)]) > k)) { 
                 array[i] = array[parent(i)];
                 i = parent(i);
             }
             array[i] = k;
-        
-        }
-        
-        
+        } 
     }
     public int heapDelMin() {
         int min;
@@ -128,8 +108,7 @@ public class MinBinaryheap {
     }
     public void heapDecKey(int i, int newk) {
         int temp;
-
-
+        
         if (newk < array[i]) {
             array[i] = newk;
             while ((i > 0) && (array[parent(i)] > array[i])) {
