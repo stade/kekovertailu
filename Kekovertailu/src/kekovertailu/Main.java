@@ -35,14 +35,20 @@ public class Main {
             res = heap.heapDelMin();
 
             System.out.println(res);
-       
-            
-
-
-
-
         }
          * 
          */
+
+
+        FibonacciHeap fibHeap = new FibonacciHeap();
+
+        fibHeap.heapInsert(10);
+        fibHeap.heapInsert(9);
+        fibHeap.heapInsert(8);
+        fibHeap.heapInsert(7);
+
+        fibHeap.printRootList();
+
+
     }
 }

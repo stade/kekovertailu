@@ -18,13 +18,13 @@ public class MinBinaryheap {
     private int heapsize;
 
     public MinBinaryheap() {
-        array = new int[10];
-        heapsize = 0;
+        this.array = new int[10];
+        this.heapsize = 0;
     }
 
     public MinBinaryheap(int s) {
-        array = new int[s];
-        heapsize = 0;
+        this.array = new int[s];
+        this.heapsize = 0;
     }
     public int getHeapsize() {
         return this.heapsize;
