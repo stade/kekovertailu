@@ -47,6 +47,13 @@ public class FibonacciNode {
     public void setRight(FibonacciNode node) {
         this.right = node;
     }
+    public void setParent(FibonacciNode node) {
+        this.parent = node;
+    }
+    public void setChild(FibonacciNode node) {
+        this.child = node;
+    }
+
     public int getKey() {
         return this.key;
     }
@@ -55,6 +62,12 @@ public class FibonacciNode {
     }
     public FibonacciNode getRight() {
         return this.right;
+    }
+    public FibonacciNode getParent() {
+        return this.parent;
+    }
+    public FibonacciNode getChild() {
+        return this.child;
     }
 
 }
