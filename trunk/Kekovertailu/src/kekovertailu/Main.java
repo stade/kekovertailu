@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package kekovertailu;
 
 /**
@@ -32,9 +31,9 @@ public class Main {
         int res;
         while (heap.getHeapsize() != 0) {
 
-            res = heap.heapDelMin();
+        res = heap.heapDelMin();
 
-            System.out.println(res);
+        System.out.println(res);
         }
          * 
          */
@@ -47,7 +46,7 @@ public class Main {
         fibHeap.heapInsert(9);
         fibHeap.heapInsert(8);
         fibHeap.heapInsert(7);
-        */
+         */
 
         System.out.println("rootlist of 1 ");
         fibHeap.printRootList();
@@ -59,7 +58,7 @@ public class Main {
         fibHeap2.heapInsert(3);
         fibHeap2.heapInsert(1);
         fibHeap2.heapInsert(2);
-        */
+         */
         System.out.println("rootlist of 2 ");
         fibHeap2.printRootList();
 
@@ -79,7 +78,7 @@ public class Main {
 
         System.out.println("rootlist of 3 ");
         fibHeap3.printRootList();
-        
+
 
 
     }
