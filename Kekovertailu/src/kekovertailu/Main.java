@@ -16,49 +16,63 @@ public class Main {
     public static void main(String[] args) {
 
         /*
-        MinBinaryheap heap = new MinBinaryheap();
+        MinBinaryheap heap1 = new MinBinaryheap();
+        MinBinaryheap heap2 = new MinBinaryheap();
+        MinBinaryheap heap3;
 
-        heap.heapInsert(55);
-        heap.heapInsert(33);
-        heap.heapInsert(44);
-        heap.heapInsert(77);
-        heap.heapInsert(22);
-        heap.heapInsert(99);
-        heap.heapInsert(34);
-        heap.heapInsert(88);
-        heap.heapInsert(2);
+        heap1.heapInsert(10);
+        heap1.heapInsert(20);
+        heap1.heapInsert(40);
+        heap1.heapInsert(30);
+        heap1.heapInsert(50);
 
-        int res;
-        while (heap.getHeapsize() != 0) {
+        heap2.heapInsert(70);
+        heap2.heapInsert(60);
+        heap2.heapInsert(90);
+        heap2.heapInsert(80);
 
-        res = heap.heapDelMin();
+        heap3 = MinBinaryheap.merge(heap1, heap2);
 
-        System.out.println(res);
-        }
-         * 
-         */
+        heap3.heapPrint();
+        */
+        
 
-
+        
         FibonacciHeap fibHeap = new FibonacciHeap();
 
         fibHeap.heapInsert(10);
-        /*
         fibHeap.heapInsert(9);
         fibHeap.heapInsert(8);
-        fibHeap.heapInsert(7);
-         */
+        fibHeap.heapInsert(6);
+
+        fibHeap.printMinSibling();
+        
 
         System.out.println("rootlist of 1 ");
         fibHeap.printRootList();
+        
+        System.out.println("Deleted node = " + fibHeap.heapDeleteMin());
 
+        fibHeap.printRootList();
+
+        System.out.println("Deleted node = " + fibHeap.heapDeleteMin());
+
+        fibHeap.printRootList();
+
+        System.out.println("Deleted node = " + fibHeap.heapDeleteMin());
+
+        System.out.println("min = " + fibHeap.heapMin());
+ 
+
+        /*
         FibonacciHeap fibHeap2 = new FibonacciHeap();
 
         fibHeap2.heapInsert(4);
-        /*
+        
         fibHeap2.heapInsert(3);
         fibHeap2.heapInsert(1);
         fibHeap2.heapInsert(2);
-         */
+        
         System.out.println("rootlist of 2 ");
         fibHeap2.printRootList();
 
@@ -78,7 +92,7 @@ public class Main {
 
         System.out.println("rootlist of 3 ");
         fibHeap3.printRootList();
-
+        */
 
 
     }

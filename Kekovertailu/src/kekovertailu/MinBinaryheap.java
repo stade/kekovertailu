@@ -28,6 +28,9 @@ public class MinBinaryheap {
     public int getHeapsize() {
         return this.heapsize;
     }
+    public void addHeapsize() {
+        this.heapsize++;
+    }
     // Returns parent of given index of a node.
 
     public int parent(int i) {
@@ -37,12 +40,10 @@ public class MinBinaryheap {
 
     }
     // Returns left child of given index of a node.
-
     public int leftchild(int i) {
         return (2 * i) + 1;
     }
     // Returns right child of given index of a node.
-
     public int rightchild(int i) {
         return (2 * i) + 2;
     }
@@ -120,29 +121,46 @@ public class MinBinaryheap {
             }
         }
     }
+    public void heapPrint() {
 
-    public static MinBinaryheap heapMerge(MinBinaryheap heap1, MinBinaryheap heap2) {
+        int i = 0;
+
+        System.out.print("Contents of heap ");
+
+        while (i <= heapsize-1) {
+
+            System.out.print(" " + array[i] + " ");
+            i++;
+        }
+
+
+
+    }
+
+    public static MinBinaryheap merge(MinBinaryheap heap1, MinBinaryheap heap2) {
 
         int newSize = heap1.getHeapsize() + heap2.getHeapsize();
-
-
         MinBinaryheap mergeHeap = new MinBinaryheap(newSize);
-
-        int[] oldArray1 = heap1.array;
-        int[] oldArray2 = heap2.array;
 
         int i = 0;
         int j = 0;
         int k = 0;
 
-        while (i < mergeHeap.getHeapsize()) {
+        while (i < newSize) {
 
-            if (j < heap1.getHeapsize()) {
+            if (j <= heap1.getHeapsize()-1) {
+                System.out.println ("i = " + i + " j= " + j + " ");
                 mergeHeap.array[i] = heap1.array[j];
+                mergeHeap.addHeapsize();
                 i++;
                 j++;
-            } else {
+
+            } 
+            else {
+                System.out.println ("i = " + i + " k= " + k + " ");
+
                 mergeHeap.array[i] = heap2.array[k];
+                mergeHeap.addHeapsize();
                 i++;
                 k++;
             }
@@ -150,12 +168,10 @@ public class MinBinaryheap {
 
         i = newSize - 1;
 
-        while (i > 0) {
-
+        while (i <= 0) {
             mergeHeap.minHeapify(i);
             i--;
         }
-
         return mergeHeap;
 
     }

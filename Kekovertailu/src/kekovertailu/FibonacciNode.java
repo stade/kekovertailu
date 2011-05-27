@@ -39,9 +39,7 @@ public class FibonacciNode {
         this.mark = false;
     }
 
-    public void setDegree(int d) {
-        this.degree = d;
-    }
+   
 
     public void setLeft(FibonacciNode node) {
         this.left = node;
@@ -58,7 +56,12 @@ public class FibonacciNode {
     public void setChild(FibonacciNode node) {
         this.child = node;
     }
-
+    public void setDegree(int d) {
+        this.degree = d;
+    }
+    public void setMark(boolean b) {
+        this.mark = b;
+    }
     public int getKey() {
         return this.key;
     }
@@ -77,5 +80,8 @@ public class FibonacciNode {
 
     public FibonacciNode getChild() {
         return this.child;
+    }
+    public int getDegree() {
+        return this.degree;
     }
 }

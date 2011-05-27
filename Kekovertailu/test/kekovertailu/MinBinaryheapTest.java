@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package kekovertailu;
 
 import org.junit.AfterClass;
@@ -37,7 +36,7 @@ public class MinBinaryheapTest {
         int expResult = 0;
         int result = instance.getHeapsize();
         assertEquals(expResult, result);
- 
+
     }
 
     /**
@@ -52,7 +51,7 @@ public class MinBinaryheapTest {
         int expResult = 0;
         int result = instance.parent(i);
         assertEquals(expResult, result);
-  
+
     }
 
     /**
@@ -97,10 +96,10 @@ public class MinBinaryheapTest {
         instance.heapInsert(3);
         instance.heapInsert(2);
         instance.heapInsert(1);
-        instance.heapDelMin();
+//        instance.heapDelMin();
         int result = instance.heapDelMin();
         assertEquals(expResult, result);
-     
+
     }
 
     /**
@@ -133,7 +132,7 @@ public class MinBinaryheapTest {
         int result = instance.heapMin();
         int expResult = 55;
         assertEquals(expResult, result);
- 
+
     }
 
     /**
@@ -151,7 +150,7 @@ public class MinBinaryheapTest {
         int expResult = 33;
         int result = instance.heapDelMin();
         assertEquals(expResult, result);
- 
+
     }
 
     /**
@@ -166,10 +165,9 @@ public class MinBinaryheapTest {
         MinBinaryheap instance = new MinBinaryheap();
         instance.heapInsert(33);
         instance.heapDecKey(i, newk);
-        int result = instance.heapDelMin();    
+        int result = instance.heapDelMin();
         int expResult = 22;
         assertEquals(expResult, result);
 
     }
-
 }
