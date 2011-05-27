@@ -2,10 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
 package kekovertailu;
-
 
 /**
  *
@@ -22,6 +19,7 @@ public class FibonacciHeap {
         this.numNodes = 0;
 
     }
+
     public void heapInsert(int key) {
 
         FibonacciNode node = new FibonacciNode(key);
@@ -31,42 +29,42 @@ public class FibonacciHeap {
             node.setLeft(node);
             node.setRight(node);
             min = node;
-            
-        }
-        else {
+
+        } else {
             // If node is smaller than min it becames min
-            
+
             // If min is the only node in the heap, node becames left and right of min
             if (min.getLeft().equals(min)) {
 
                 min.setLeft(node);
                 min.setRight(node);
                 node.setLeft(min);
-                node.setRight(min); 
+                node.setRight(min);
 
-            }
-            // If there is more nodes than min in the heap, node becames left of min and right of
+            } // If there is more nodes than min in the heap, node becames left of min and right of
             // the node that was left to min
             else {
-                   
+
                 FibonacciNode temp = min.getLeft();
 
                 node.setRight(min);
                 node.setLeft(temp);
                 min.setLeft(node);
                 temp.setRight(node);
-               
+
             }
             if (node.getKey() < min.getKey()) {
 
                 min = node;
             }
-         } 
+        }
         numNodes = numNodes + 1;
     }
+
     public int heapMin() {
         return min.getKey();
     }
+
     public int heapDeleteMin() {
 
         FibonacciNode toBeDeleted = min;
@@ -88,8 +86,7 @@ public class FibonacciHeap {
 
                 child.setParent(null);
 
-            }
-            else {
+            } else {
                 // If min has more than one child
                 while (child.getLeft().equals(child)) {
 
@@ -108,6 +105,7 @@ public class FibonacciHeap {
 
                 FibonacciNode temp = min.getLeft();
 
+                // Insert the last child to root list
                 child.setRight(min);
                 child.setLeft(temp);
                 min.setLeft(child);
@@ -117,20 +115,24 @@ public class FibonacciHeap {
             }
         }
 
+
         FibonacciNode leftToMin = min.getLeft();
         FibonacciNode rightToMin = min.getRight();
 
+        // Remove the minimum node from the rootlist
         leftToMin.setRight(rightToMin);
         rightToMin.setLeft(leftToMin);
 
+        //  Min is the only node in heap
         if (min.getRight().equals(min)) {
             min = null;
-        }
+        } // There is more than one node in the heap
         else {
             min = min.getRight();
             consolidate();
         }
 
+        // Delete all the references of min node to other nodes
         toBeDeleted.setLeft(null);
         toBeDeleted.setRight(null);
         toBeDeleted.setChild(null);
@@ -139,18 +141,20 @@ public class FibonacciHeap {
 
         return toBeDeleted.getKey();
     }
+
     private void consolidate() {
-        FibonacciNode[] array = new FibonacciNode[numNodes];
 
-        for (i = 0; i < numNodes, i++) {
+        int maxDegree = (int) log2(numNodes);
+        FibonacciNode[] degreeArray = new FibonacciNode[maxDegree];
 
-            
+        for (int i = 0; i < maxDegree; i++) {
+            degreeArray[i] = null;
         }
-        
 
+        FibonacciNode start = min;
+        FibonacciNode next = min.getRight();
 
-
-
+   
     }
 
     // Merges two Fibonacci-heaps as one
@@ -188,6 +192,7 @@ public class FibonacciHeap {
         return unionHeap;
 
     }
+
     public void printRootList() {
 
         int i = 0;
@@ -195,12 +200,16 @@ public class FibonacciHeap {
 
         while (i < numNodes) {
 
-           
+
             System.out.println(temp.getKey());
 
             temp = temp.getLeft();
             i++;
 
-        }  
+        }
+    }
+
+    private static double log2(int n) {
+        return (Math.log(n) / Math.log(2));
     }
 }

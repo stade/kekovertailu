@@ -2,9 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package kekovertailu;
-
 
 /**
  *
@@ -26,35 +24,39 @@ public class MinBinaryheap {
         this.array = new int[s];
         this.heapsize = 0;
     }
+
     public int getHeapsize() {
         return this.heapsize;
     }
     // Returns parent of given index of a node.
+
     public int parent(int i) {
-        double d = (double)i;
-        d = Math.floor((d-1)/2);
-        return (int)d;
+        double d = (double) i;
+        d = Math.floor((d - 1) / 2);
+        return (int) d;
 
     }
     // Returns left child of given index of a node.
+
     public int leftchild(int i) {
-        return (2*i)+1;
+        return (2 * i) + 1;
     }
     // Returns right child of given index of a node.
+
     public int rightchild(int i) {
-        return (2*i)+2;
+        return (2 * i) + 2;
     }
-    public void minHeapify(int i) {
-        int l,r,smallest, temp;
+
+    private void minHeapify(int i) {
+        int l, r, smallest, temp;
 
         l = leftchild(i);
         r = rightchild(i);
 
         if (r <= heapsize) {
-            if( array[l] < array[r]) {
+            if (array[l] < array[r]) {
                 smallest = l;
-            }
-            else {
+            } else {
                 smallest = r;
             }
             if (array[i] > array[smallest]) {
@@ -64,8 +66,7 @@ public class MinBinaryheap {
 
                 minHeapify(smallest);
 
-            }
-            else if ((l == heapsize) && (array[i] > array[l])) {
+            } else if ((l == heapsize) && (array[i] > array[l])) {
                 temp = array[i];
                 array[i] = array[l];
                 array[l] = temp;
@@ -77,46 +78,85 @@ public class MinBinaryheap {
     public int heapMin() {
         return array[0];
     }
-    
 
     public void heapInsert(int k) {
         int i = 0;
 
-        heapsize = heapsize+1;
+        heapsize = heapsize + 1;
         i = heapsize;
-        i= i-1;
-        
+        i = i - 1;
+
         if (heapsize == 1) {
             array[0] = k;
-        }
-        else {
-            while ((i > 0) && ((array[parent(i)]) > k)) { 
+        } else {
+            while ((i > 0) && ((array[parent(i)]) > k)) {
                 array[i] = array[parent(i)];
                 i = parent(i);
             }
             array[i] = k;
-        } 
+        }
     }
+
     public int heapDelMin() {
         int min;
 
         min = array[0];
-        array[0] = array[heapsize-1];
-        heapsize = heapsize-1;
+        array[0] = array[heapsize - 1];
+        heapsize = heapsize - 1;
         minHeapify(0);
         return min;
     }
+
     public void heapDecKey(int i, int newk) {
         int temp;
-        
+
         if (newk < array[i]) {
             array[i] = newk;
             while ((i > 0) && (array[parent(i)] > array[i])) {
                 temp = array[i];
-                array [i] = array[parent(i)];
+                array[i] = array[parent(i)];
                 array[parent(i)] = temp;
                 i = parent(i);
             }
         }
+    }
+
+    public static MinBinaryheap heapMerge(MinBinaryheap heap1, MinBinaryheap heap2) {
+
+        int newSize = heap1.getHeapsize() + heap2.getHeapsize();
+
+
+        MinBinaryheap mergeHeap = new MinBinaryheap(newSize);
+
+        int[] oldArray1 = heap1.array;
+        int[] oldArray2 = heap2.array;
+
+        int i = 0;
+        int j = 0;
+        int k = 0;
+
+        while (i < mergeHeap.getHeapsize()) {
+
+            if (j < heap1.getHeapsize()) {
+                mergeHeap.array[i] = heap1.array[j];
+                i++;
+                j++;
+            } else {
+                mergeHeap.array[i] = heap2.array[k];
+                i++;
+                k++;
+            }
+        }
+
+        i = newSize - 1;
+
+        while (i > 0) {
+
+            mergeHeap.minHeapify(i);
+            i--;
+        }
+
+        return mergeHeap;
+
     }
 }
