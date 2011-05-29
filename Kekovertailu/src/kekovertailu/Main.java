@@ -40,6 +40,7 @@ public class Main {
         
         FibonacciHeap fibHeap = new FibonacciHeap();
 
+        /*
         for (int i = 1; i < 6; i++) {
             System.out.println("--------------");
             fibHeap.heapInsert(i);
@@ -52,9 +53,25 @@ public class Main {
             fibHeap.printMinSibling();
             System.out.println("deleted was = " + fibHeap.heapDeleteMin());
         }
-      
-    
+        */
 
+        fibHeap.heapInsert(4);
+        fibHeap.heapInsert(300);
+        fibHeap.heapInsert(200);
+        fibHeap.heapInsert(1);
+        fibHeap.heapInsert(1000);
+        System.out.println("---------------------------");
+        System.out.println("deleted was = " + fibHeap.heapDeleteMin());
+        System.out.println("---------------------------");
+        System.out.println("deleted was = " + fibHeap.heapDeleteMin());
+        System.out.println("---------------------------");
+        System.out.println("deleted was = " + fibHeap.heapDeleteMin());
+        System.out.println("---------------------------");
+        System.out.println("---------------------------");
+        System.out.println("deleted was = " + fibHeap.heapDeleteMin());
+        System.out.println("---------------------------");
+        System.out.println("deleted was = " + fibHeap.heapDeleteMin());
+        System.out.println("---------------------------");
         /*
         System.out.println(fibHeap.heapMin());
 
