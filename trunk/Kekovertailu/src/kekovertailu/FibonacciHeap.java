@@ -91,24 +91,35 @@ public class FibonacciHeap {
             else {
                 // If min has more than one child
 
+                FibonacciNode leftChild = null;
+                FibonacciNode rightChild  = null;
                 FibonacciNode nextChild = null;
 
-                do {
 
-                //TODO: broken fix this
-                    child = child.getLeft();
+
+                while (!child.getLeft().equals(child)) {
+
+                    System.out.println("Adding to " + child.getKey() + " rootlist ");
+
+                    nextChild = child.getLeft();
+
+                    leftChild = child.getLeft();
+                    rightChild = child.getRight();
+
+                    leftChild.setRight(rightChild);
+                    rightChild.setLeft(leftChild);
 
                     FibonacciNode temp = min.getLeft();
-                    nextChild =  child.getLeft();
-
+                   
                     child.setRight(min);
                     child.setLeft(temp);
                     min.setLeft(child);
                     temp.setRight(child);
 
                     child.setParent(null);
+
+                    child = nextChild;
                 }
-                while (!nextChild.equals(child));
              
 
                 FibonacciNode temp = min.getLeft();
@@ -125,9 +136,14 @@ public class FibonacciHeap {
         FibonacciNode leftToMin = min.getLeft();
         FibonacciNode rightToMin = min.getRight();
 
+        System.out.println("Mins siblings before removal: left= " + min.getLeft().getKey() + " right = " + min.getRight().getKey());
+
         // Remove the minimum node from the rootlist
         leftToMin.setRight(rightToMin);
         rightToMin.setLeft(leftToMin);
+
+        
+
 
         //  Min is the only node in heap
         if (min.getRight().equals(min)) {
@@ -301,8 +317,6 @@ public class FibonacciHeap {
 
         x.setDegree(x.getDegree()+1);
         y.setMark(false);
-
-
     }
 
     // Merges two Fibonacci-heaps as one
@@ -338,12 +352,8 @@ public class FibonacciHeap {
         unionHeap.numNodes = heap1.numNodes + heap2.numNodes;
 
         return unionHeap;
-
     }
     public void printRootList() {
-
-
-
         FibonacciNode temp = min;
 
         if (min != null) {
@@ -360,7 +370,7 @@ public class FibonacciHeap {
             System.out.println();
         }
         else {
-            System.out.print("Rootlist is empty");
+            System.out.println("Rootlist is empty");
         }
     }
     public void printMinSibling() {
