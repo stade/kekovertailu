@@ -125,6 +125,9 @@ public class FibonacciHeap {
                 FibonacciNode temp = min.getLeft();
 
                 // Insert the last child to root list
+
+                System.out.println("Adding to " + child.getKey() + " rootlist ");
+
                 child.setRight(min);
                 child.setLeft(temp);
                 min.setLeft(child);
@@ -167,7 +170,7 @@ public class FibonacciHeap {
     private void consolidate() {
 
         // Calculater max degree of heaps in rootlist
-        int maxDegree = 2 +(int) log2(numNodes);
+        int maxDegree = 1 +(int) maxDegree(numNodes);
 
         System.out.println("maxDegree: " + maxDegree);
         System.out.println("num of nodes: " + numNodes);
@@ -177,15 +180,24 @@ public class FibonacciHeap {
         FibonacciNode[] degreeArray = new FibonacciNode[maxDegree];
 
 
-        for (int i = 0; i < maxDegree-1; i++) {
+        for (int i = 0; i < maxDegree; i++) {
             degreeArray[i] = null;
         }
 
+        FibonacciNode leftOfEnd = min.getLeft();
+        FibonacciNode end = leftOfEnd.getRight();
         FibonacciNode x = min.getLeft();
+
+        System.out.println("At the begin min is: " + min.getKey() + " and end is: " + end.getKey());
+
+
         FibonacciNode y = null;
         FibonacciNode temp = null;
         int degree = 0;
         int i = 0;
+
+         printRootList();
+
         do {
             System.out.println("min is " + min.getKey());
             x = x.getRight();
@@ -193,6 +205,8 @@ public class FibonacciHeap {
             System.out.println("right of x: " + x.getRight().getKey());
 
             degree = x.getDegree();
+
+            System.out.println("Current degree is: " + degree);
 
             while (degreeArray[degree] != null) {
                 y = degreeArray[degree];
@@ -204,33 +218,44 @@ public class FibonacciHeap {
                     x = y;
                     y = temp;
                 }
+                System.out.println(" x should be smaller than y now x = " + x.getKey() + " y = " + y.getKey());
 
                 heapLink(y,x);
                 degreeArray[degree] = null;
 
-                degree++;
+                degree = degree + 1;
             }
             degreeArray[degree] = x;
 
             System.out.println("degreeArray[" + degree + "]: " + degreeArray[degree].getKey());
-
-            i++;
-
             System.out.println("min " + min.getKey());
             System.out.println("x: " + x.getKey());
             System.out.println("right of x: " + x.getRight().getKey());
-
-
         }
-        while (!x.getRight().equals(min));
+        while (!x.getRight().equals(end));
+
+        System.out.println("Consolate ready");
 
         min = null;
 
-        for (i = 0; i < maxDegree-1; i++) {
+        for (i = 0; i < maxDegree; i++) {
 
             if (degreeArray[i] != null) {
 
-                 System.out.println("jeejee = " + degreeArray[i].getKey());
+                System.out.println(" degreeArray[" + i + "] = " + degreeArray[i].getKey());
+            }
+            else {
+                System.out.println(" degreeArray[" + i + "] = null");
+            }
+        }
+
+
+
+        for (i = 0; i < maxDegree; i++) {
+
+            if (degreeArray[i] != null) {
+
+                 System.out.println(" degreeArray[" + i + "] = " + degreeArray[i].getKey());
 
                 if (min == null) {
                     min = degreeArray[i];
@@ -401,7 +426,22 @@ public class FibonacciHeap {
     }
 
 
-    private static double log2(int n) {
-        return (Math.log(n) / Math.log(2));
+    private static double maxDegree(int n) {
+
+        double res = 0;
+
+        if (n == 0) {
+            return 1;
+        }
+        if (n == 1) {
+            return 2;
+        }
+        else {
+            res = (Math.log(n) / Math.log((1 + Math.sqrt(5))/2));
+            res = Math.round(res);
+            return res;
+        }
+
+        
     }
 }

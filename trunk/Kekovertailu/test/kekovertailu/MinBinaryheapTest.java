@@ -96,7 +96,7 @@ public class MinBinaryheapTest {
         instance.heapInsert(3);
         instance.heapInsert(2);
         instance.heapInsert(1);
-//        instance.heapDelMin();
+        instance.heapDelMin();
         int result = instance.heapDelMin();
         assertEquals(expResult, result);
 
