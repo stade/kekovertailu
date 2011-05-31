@@ -40,13 +40,50 @@ public class Main {
         
         FibonacciHeap fibHeap = new FibonacciHeap();
 
-         fibHeap.heapInsert(10000);
-        fibHeap.heapInsert(2000);
-        fibHeap.heapInsert(3000);
-        fibHeap.heapInsert(1500);
-        fibHeap.heapInsert(4444);
+        FibonacciNode fib2 = new FibonacciNode(2);
+        FibonacciNode fib3 = new FibonacciNode(3);
+        FibonacciNode fib4 = new FibonacciNode(4);
+        FibonacciNode fib5 = new FibonacciNode(5);
+        FibonacciNode fib6 = new FibonacciNode(6);
+        FibonacciNode fib7 = new FibonacciNode(7);
+        FibonacciNode fib8 = new FibonacciNode(8);
+        FibonacciNode fib9 = new FibonacciNode(9);
+        FibonacciNode fib10 = new FibonacciNode(10);
+        FibonacciNode fib11 = new FibonacciNode(11);
+        FibonacciNode fib12 = new FibonacciNode(12);
+        FibonacciNode fib13 = new FibonacciNode(13);
 
+        fibHeap.heapInsert(fib2);
+        fibHeap.heapInsert(fib3);
+        fibHeap.heapInsert(fib4);
+        fibHeap.heapInsert(fib5);
+        fibHeap.heapInsert(fib6);
+        fibHeap.heapInsert(fib7);
+        fibHeap.heapInsert(fib8);
+        fibHeap.heapInsert(fib9);
+        fibHeap.heapInsert(fib10);
+        fibHeap.heapInsert(fib11);
+        fibHeap.heapInsert(fib12);
+        fibHeap.heapInsert(fib13);
 
+        System.out.println("---------------");
+        fibHeap.printRootList();
+        fibHeap.printMinChild();
+        fibHeap.printMinSibling();
+        fibHeap.heapDeleteMin();
+        System.out.println("---------------");
+        fibHeap.printRootList();
+        fibHeap.printMinChild();
+        fibHeap.printMinSibling();
+        fibHeap.heapDecKey(fib5,2);
+        fibHeap.heapDecKey(fib9,0);
+        fibHeap.heapDecKey(fib7,5);
+        System.out.println("---------------");
+        fibHeap.printRootList();
+        fibHeap.printMinChild();
+        fibHeap.printMinSibling();
+
+        /*
         for (int i = 1; i < 500; i++) {
             System.out.println("--------------");
             fibHeap.heapInsert(i);
@@ -59,10 +96,10 @@ public class Main {
             fibHeap.printMinSibling();
             System.out.println("deleted was = " + fibHeap.heapDeleteMin());
         }
-
+        */
         
         
-       
+        /*
         System.out.println("---------------------------");
         System.out.println("deleted was = " + fibHeap.heapDeleteMin());
         System.out.println("---------------------------");
@@ -75,7 +112,7 @@ public class Main {
         System.out.println("---------------------------");
         System.out.println("deleted was = " + fibHeap.heapDeleteMin());
         System.out.println("---------------------------");
-        
+        */
         /*
         System.out.println(fibHeap.heapMin());
 
