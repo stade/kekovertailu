@@ -97,7 +97,6 @@ public class MinBinaryheap {
             array[i] = k;
         }
     }
-
     public int heapDelMin() {
         int min;
 
@@ -132,11 +131,7 @@ public class MinBinaryheap {
             System.out.print(" " + array[i] + " ");
             i++;
         }
-
-
-
     }
-
     public static MinBinaryheap merge(MinBinaryheap heap1, MinBinaryheap heap2) {
 
         int newSize = heap1.getHeapsize() + heap2.getHeapsize();
@@ -173,6 +168,5 @@ public class MinBinaryheap {
             i--;
         }
         return mergeHeap;
-
     }
 }

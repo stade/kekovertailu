@@ -2,12 +2,18 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package kekovertailu;
 
 /**
  *
  * @author tatutahv
+ *
  */
+import java.util.*;
+
+
+
 public class Main {
 
     /**
@@ -15,31 +21,92 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        /*
-        MinBinaryheap heap1 = new MinBinaryheap();
-        MinBinaryheap heap2 = new MinBinaryheap();
-        MinBinaryheap heap3;
-
-        heap1.heapInsert(10);
-        heap1.heapInsert(20);
-        heap1.heapInsert(40);
-        heap1.heapInsert(30);
-        heap1.heapInsert(50);
-
-        heap2.heapInsert(70);
-        heap2.heapInsert(60);
-        heap2.heapInsert(90);
-        heap2.heapInsert(80);
-
-        heap3 = MinBinaryheap.merge(heap1, heap2);
-
-        heap3.heapPrint();
-        */
-        
+        int test = 10000000;
+        long start1,start2,start3,end1,end2,end3,totalTime1,totalTime2,totalTime3;
 
         
+        MinBinaryheap heap = new MinBinaryheap(test);
         FibonacciHeap fibHeap = new FibonacciHeap();
+        PriorityQueue javaHeap = new PriorityQueue();
+        
+        start1 = System.currentTimeMillis();
 
+        for (int i = test-1; i >=  0 ; i--) {
+
+            FibonacciNode node = new FibonacciNode(i);
+
+            fibHeap.heapInsert(node);
+        }
+
+        end1 = System.currentTimeMillis();
+
+        start2 = System.currentTimeMillis();
+
+        for (int i = test-1; i >= 0 ; i--) {
+
+            heap.heapInsert(i);
+
+        }
+
+        end2 = System.currentTimeMillis();
+
+        start3 = System.currentTimeMillis();
+
+        for (int i = test-1; i >= 0 ; i--) {
+
+            javaHeap.add(i);
+
+        }
+        
+        end3 = System.currentTimeMillis();
+
+
+        totalTime1 = end1 - start1;
+        totalTime2 = end2 - start2;
+        totalTime3 = end3 - start3;
+
+        System.out.println("Time of inserting " + test + " times to Fibonacci-heap " + totalTime1 + " milliseconds");
+        System.out.println("Time of inserting " + test + " times to binaryheap " + totalTime2 + " milliseconds");
+        System.out.println("Time of inserting " + test + " times to Java-heap " + totalTime3 + " milliseconds");
+
+
+        start1 = System.currentTimeMillis();
+
+        for (int i = 0; i < test; i++) {
+            fibHeap.heapDeleteMin();
+
+        }
+
+        end1 = System.currentTimeMillis();
+
+        start2 = System.currentTimeMillis();
+
+        for (int i = 0; i < test; i++) {
+            heap.heapDelMin();
+        }
+
+        end2 = System.currentTimeMillis();
+
+        start3 = System.currentTimeMillis();
+
+        for (int i = test-1; i >= 0 ; i--) {
+
+            javaHeap.poll();
+
+        }
+
+        end3 = System.currentTimeMillis();
+
+        totalTime1 = end1 - start1;
+        totalTime2 = end2 - start2;
+        totalTime3 = end3 - start3;
+
+        System.out.println("Time of deleting min " + test + " times from Fibonacci-heap " + totalTime1 + " milliseconds");
+        System.out.println("Time of deleting min " + test + " times from binaryheap " + totalTime2 + " milliseconds");
+        System.out.println("Time of deleting min " + test + " times from Javaheap " + totalTime3 + " milliseconds");
+        
+
+        /*
         FibonacciNode fib2 = new FibonacciNode(2);
         FibonacciNode fib3 = new FibonacciNode(3);
         FibonacciNode fib4 = new FibonacciNode(4);
@@ -82,23 +149,44 @@ public class Main {
         fibHeap.printRootList();
         fibHeap.printMinChild();
         fibHeap.printMinSibling();
-
+        */
         /*
-        for (int i = 1; i < 500; i++) {
+        FibonacciNode res = null;
+        int missing = 0;
+        
+        for (int i = 5000; i >= 0; i--) {
+
+            FibonacciNode node = new FibonacciNode(i);
+
             System.out.println("--------------");
-            fibHeap.heapInsert(i);
+            fibHeap.heapInsert(node);
+            
             fibHeap.printRootList();
+            
         }
-        for (int i = 1; i < 500; i++) {
+
+        for (int i = 0; i < 5000; i++) {
             System.out.println("---------------");
+            
             fibHeap.printRootList();
+            
             fibHeap.printMinChild();
             fibHeap.printMinSibling();
-            System.out.println("deleted was = " + fibHeap.heapDeleteMin());
+            
+            res = fibHeap.heapDeleteMin();
+
+            if (res != null) {
+                if (res.getKey() != i) {
+                    missing++;
+                }
+                System.out.println("**************************************");
+                System.out.println("deleted should be " + i + " deleted was = " + res.getKey());
+                System.out.println("**************************************");
+            }
         }
+
+        System.out.println("missing " +  missing);
         */
-        
-        
         /*
         System.out.println("---------------------------");
         System.out.println("deleted was = " + fibHeap.heapDeleteMin());
