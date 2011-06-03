@@ -21,6 +21,9 @@ public class FibonacciHeap {
         this.numNodes = 0;
 
     }
+    public int getNumNodes(){
+        return numNodes;
+    }
 
     public void heapInsert(FibonacciNode node) {
 
@@ -81,9 +84,9 @@ public class FibonacciHeap {
 
                     FibonacciNode temp = min.getLeft();
 
-                    /*
+                    
                     System.out.println("Adding to " + child.getKey() + " rootlist ");
-                    */
+                    
                     child.setRight(min);
                     child.setLeft(temp);
                     min.setLeft(child);
@@ -97,22 +100,22 @@ public class FibonacciHeap {
                     FibonacciNode leftChild = null;
                     FibonacciNode rightChild  = null;
                     FibonacciNode nextChild = null;
-
+                    FibonacciNode temp = null;
 
                     // Puts mins childs to rootlist until one child is remaining
                     while (!child.getLeft().equals(child)) {
-                        /*
+                        
                         System.out.println("Adding to " + child.getKey() + " rootlist ");
-                        */
+                        
                         nextChild = child.getLeft();
-
+                        
                         leftChild = child.getLeft();
                         rightChild = child.getRight();
 
                         leftChild.setRight(rightChild);
                         rightChild.setLeft(leftChild);
 
-                        FibonacciNode temp = min.getLeft();
+                        temp = min.getLeft();
                    
                         child.setRight(min);
                         child.setLeft(temp);
@@ -123,14 +126,15 @@ public class FibonacciHeap {
 
                         child = nextChild;
                     }
-             
 
-                    FibonacciNode temp = min.getLeft();
+                    
+
+                    temp = min.getLeft();
 
                     // Insert the last child to root list
-                    /*
+                    
                     System.out.println("Adding to " + child.getKey() + " rootlist ");
-                    */
+                    
                     child.setRight(min);
                     child.setLeft(temp);
                     min.setLeft(child);
@@ -141,9 +145,9 @@ public class FibonacciHeap {
             }
             FibonacciNode leftToMin = min.getLeft();
             FibonacciNode rightToMin = min.getRight();
-            /*
+            
             System.out.println("Mins siblings before removal: left= " + min.getLeft().getKey() + " right = " + min.getRight().getKey());
-            */
+            
             // Remove the minimum node from the rootlist
             leftToMin.setRight(rightToMin);
             rightToMin.setLeft(leftToMin);
@@ -178,7 +182,7 @@ public class FibonacciHeap {
     private void consolidate() {
 
         // Calculater max degree of heaps in rootlist
-        int maxDegree = (int) maxDegree(numNodes);
+        int maxDegree = 2 + (int) maxDegree(numNodes);
         /*
         System.out.println("maxDegree: " + maxDegree);
         System.out.println("num of nodes: " + numNodes);
@@ -228,11 +232,13 @@ public class FibonacciHeap {
             */
             while (degreeArray[degree] != null) {
                 y = degreeArray[degree];
-                /*
+                
                 System.out.println("x = " + x.getKey() + " y = " + y.getKey());
-                */
+                
                 // Checks that we dont insert same node again
                 if (!x.equals(y)) {
+
+                    System.out.println(x.getKey() + " != " + y.getKey());
 
                     if (x.getKey() > y.getKey()) {
                         temp = x;
@@ -245,9 +251,9 @@ public class FibonacciHeap {
                         min = x;
                         end = x;
                     }
-                    /*
+                    
                     System.out.println("x should be smaller than y now x = " + x.getKey() + " y = " + y.getKey());
-                    */
+                    
                     // Makes y a child of x
                     heapLink(y,x);
 
@@ -332,7 +338,6 @@ public class FibonacciHeap {
         */
         FibonacciNode leftToY = y.getLeft();
         FibonacciNode rightToY = y.getRight();
-        FibonacciNode temp;
         FibonacciNode leftofCurrent;
         FibonacciNode currentChild;
 
@@ -347,9 +352,9 @@ public class FibonacciHeap {
             y.setLeft(y);
             y.setRight(y);
             y.setParent(x);
-            /*
+            
             System.out.println(y.getKey() + "parent is now" + y.getParent().getKey());
-            */
+            
         }
         // Y becomes left of current child of x
         else {

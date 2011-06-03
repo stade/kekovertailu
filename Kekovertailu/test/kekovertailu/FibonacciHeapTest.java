@@ -5,6 +5,7 @@
 
 package kekovertailu;
 
+import java.util.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -33,16 +34,11 @@ public class FibonacciHeapTest {
     @Test
     public void testHeapInsert() {
         System.out.println("heapInsert");
-
         boolean expResult = true;
-
         FibonacciNode node = new FibonacciNode(300);
-
         FibonacciHeap instance = new FibonacciHeap();
         instance.heapInsert(node);
-        
         boolean result = node.equals(instance.heapMin());
-
         assertEquals(expResult,result);
     }
 
@@ -59,7 +55,6 @@ public class FibonacciHeapTest {
         FibonacciNode result = instance.heapMin();
         assertEquals(expResult, result);
         
-       
     }
 
     /**
@@ -69,22 +64,24 @@ public class FibonacciHeapTest {
     public void testHeapDeleteMin() {
         System.out.println("heapDeleteMin");
 
-        int test = 1000;
+        int test = 10;
+        Random randomizer = new Random();
 
         FibonacciHeap instance = new FibonacciHeap();
-        FibonacciNode mayFail = new FibonacciNode(-1);
+        FibonacciNode mayFail = new FibonacciNode(-1000);
+
+        instance.heapInsert(mayFail);
 
         for (int i = test; i > 0; i--) {
             FibonacciNode node = new FibonacciNode(i);
             instance.heapInsert(node);
-            instance.heapInsert(mayFail);
         }
-
-        for (int i = 0; i < ((test)*2)-1; i++) {
+        for (int i = test; i > 0; i--) {
             instance.heapDeleteMin();
         }
+       
         int result = 0;
-        int expResult = 1000;
+        int expResult = 10;
 
         FibonacciNode resultNode = instance.heapDeleteMin();
 
@@ -95,19 +92,6 @@ public class FibonacciHeapTest {
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of heapLink method, of class FibonacciHeap.
-     */
-    @Test
-    public void testHeapLink() {
-        System.out.println("heapLink");
-        FibonacciNode y = null;
-        FibonacciNode x = null;
-        FibonacciHeap instance = new FibonacciHeap();
-        instance.heapLink(y, x);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of heapDecKey method, of class FibonacciHeap.
@@ -115,41 +99,34 @@ public class FibonacciHeapTest {
     @Test
     public void testHeapDecKey() {
         System.out.println("heapDecKey");
-        FibonacciNode x = null;
-        int newkey = 0;
+
+        int test = 1000;
+        int result = 0;
         FibonacciHeap instance = new FibonacciHeap();
+        FibonacciNode x = new FibonacciNode(test+1);
+
+        for (int i = test; i > 0; i--) {
+            FibonacciNode node = new FibonacciNode(i);
+            instance.heapInsert(node);
+        }
+
+        instance.heapInsert(x);
+
+        int newkey = -1000;
+        int expResult = newkey;
+        
         instance.heapDecKey(x, newkey);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+        FibonacciNode resultNode = instance.heapDeleteMin();
+
+        if (resultNode != null) {
+            result = resultNode.getKey();
+        }
+
+        assertEquals(expResult,result);  
     }
 
-    /**
-     * Test of cut method, of class FibonacciHeap.
-     */
-    @Test
-    public void testCut() {
-        System.out.println("cut");
-        FibonacciNode x = null;
-        FibonacciNode y = null;
-        FibonacciHeap instance = new FibonacciHeap();
-        instance.cut(x, y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of cascadingCut method, of class FibonacciHeap.
-     */
-    @Test
-    public void testCascadingCut() {
-        System.out.println("cascadingCut");
-        FibonacciNode y = null;
-        FibonacciHeap instance = new FibonacciHeap();
-        instance.cascadingCut(y);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
+   
     /**
      * Test of heapUnion method, of class FibonacciHeap.
      */
@@ -161,44 +138,11 @@ public class FibonacciHeapTest {
         FibonacciHeap expResult = null;
         FibonacciHeap result = FibonacciHeap.heapUnion(heap1, heap2);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
+
+        
     }
 
-    /**
-     * Test of printRootList method, of class FibonacciHeap.
-     */
-    @Test
-    public void testPrintRootList() {
-        System.out.println("printRootList");
-        FibonacciHeap instance = new FibonacciHeap();
-        instance.printRootList();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of printMinSibling method, of class FibonacciHeap.
-     */
-    @Test
-    public void testPrintMinSibling() {
-        System.out.println("printMinSibling");
-        FibonacciHeap instance = new FibonacciHeap();
-        instance.printMinSibling();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of printMinChild method, of class FibonacciHeap.
-     */
-    @Test
-    public void testPrintMinChild() {
-        System.out.println("printMinChild");
-        FibonacciHeap instance = new FibonacciHeap();
-        instance.printMinChild();
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    
 
 }

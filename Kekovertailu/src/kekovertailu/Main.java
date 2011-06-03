@@ -18,12 +18,16 @@ public class Main {
      */
     public static void main(String[] args) {
 
+        FibonacciHeap fibHeap = new FibonacciHeap();
+
+
+        /*
         int test = 4000000;
         long start1, start2, start3, end1, end2, end3, totalTime1, totalTime2, totalTime3;
 
 
         MinBinaryheap heap = new MinBinaryheap(test);
-        FibonacciHeap fibHeap = new FibonacciHeap();
+        
         PriorityQueue javaHeap = new PriorityQueue();
         System.gc();
         System.gc();
@@ -97,20 +101,19 @@ public class Main {
         System.out.println("Time of deleting min " + test + " times from Fibonacci-heap " + totalTime1 + " milliseconds");
         System.out.println("Time of deleting min " + test + " times from binaryheap " + totalTime2 + " milliseconds");
         System.out.println("Time of deleting min " + test + " times from Java priorityqueue " + totalTime3 + " milliseconds");
-
-
+        */
         /*
         FibonacciNode fib2 = new FibonacciNode(2);
         FibonacciNode fib3 = new FibonacciNode(3);
-        FibonacciNode fib4 = new FibonacciNode(4);
+        FibonacciNode fib4 = new FibonacciNode(-1000);
         FibonacciNode fib5 = new FibonacciNode(5);
         FibonacciNode fib6 = new FibonacciNode(6);
         FibonacciNode fib7 = new FibonacciNode(7);
         FibonacciNode fib8 = new FibonacciNode(8);
-        FibonacciNode fib9 = new FibonacciNode(9);
+        FibonacciNode fib9 = new FibonacciNode(5);
         FibonacciNode fib10 = new FibonacciNode(10);
         FibonacciNode fib11 = new FibonacciNode(11);
-        FibonacciNode fib12 = new FibonacciNode(12);
+        FibonacciNode fib12 = new FibonacciNode(-1000);
         FibonacciNode fib13 = new FibonacciNode(13);
 
         fibHeap.heapInsert(fib2);
@@ -126,60 +129,70 @@ public class Main {
         fibHeap.heapInsert(fib12);
         fibHeap.heapInsert(fib13);
 
+   
         System.out.println("---------------");
         fibHeap.printRootList();
         fibHeap.printMinChild();
         fibHeap.printMinSibling();
-        fibHeap.heapDeleteMin();
-        System.out.println("---------------");
-        fibHeap.printRootList();
-        fibHeap.printMinChild();
-        fibHeap.printMinSibling();
-        fibHeap.heapDecKey(fib5,2);
+        fibHeap.heapDecKey(fib5,-300);
         fibHeap.heapDecKey(fib9,0);
-        fibHeap.heapDecKey(fib7,5);
+        fibHeap.heapDecKey(fib7,-400);
         System.out.println("---------------");
         fibHeap.printRootList();
         fibHeap.printMinChild();
         fibHeap.printMinSibling();
-         */
-        /*
+
+        for (int i = 0; i < 12; i++) {
+            System.out.println("deleted was =" + fibHeap.heapDeleteMin().getKey());
+        }
+        */
+        
         FibonacciNode res = null;
         int missing = 0;
+        int integer = 0;
+        Random randomizer = new Random();
         
-        for (int i = 5000; i >= 0; i--) {
+        for (int i = 1 ; i < 40; i++) {
 
-        FibonacciNode node = new FibonacciNode(i);
+            integer = randomizer.nextInt(100);
+            FibonacciNode node = new FibonacciNode(integer);
 
-        System.out.println("--------------");
-        fibHeap.heapInsert(node);
+            System.out.println("hash " + node.hashCode());
 
-        fibHeap.printRootList();
+            System.out.println("--------------");
+            fibHeap.heapInsert(node);
+
+            fibHeap.printRootList();
 
         }
 
-        for (int i = 0; i < 5000; i++) {
-        System.out.println("---------------");
+        System.out.println("heapsize = "+ fibHeap.getNumNodes());
 
-        fibHeap.printRootList();
+        for (int i = 1; i < 40; i++) {
+            System.out.println("---------------");
 
-        fibHeap.printMinChild();
-        fibHeap.printMinSibling();
+            fibHeap.printRootList();
 
-        res = fibHeap.heapDeleteMin();
+            fibHeap.printMinChild();
+            fibHeap.printMinSibling();
 
-        if (res != null) {
-        if (res.getKey() != i) {
-        missing++;
+            res = fibHeap.heapDeleteMin();
+
+            if (res != null) {
+                /*
+                if (res.getKey() != i) {
+                    missing++;
+                }
+                 *
+                 */
+                System.out.println("**************************************");
+                System.out.println(" i =" + i + " deleted was = " + res.getKey());
+                System.out.println("**************************************");
+            }
         }
-        System.out.println("**************************************");
-        System.out.println("deleted should be " + i + " deleted was = " + res.getKey());
-        System.out.println("**************************************");
-        }
-        }
-
+        /*
         System.out.println("missing " +  missing);
-         */
+        */
         /*
         System.out.println("---------------------------");
         System.out.println("deleted was = " + fibHeap.heapDeleteMin());
