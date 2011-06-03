@@ -2,7 +2,6 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package kekovertailu;
 
 /**
@@ -12,8 +11,6 @@ package kekovertailu;
  */
 import java.util.*;
 
-
-
 public class Main {
 
     /**
@@ -21,43 +18,43 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        int test = 10000000;
-        long start1,start2,start3,end1,end2,end3,totalTime1,totalTime2,totalTime3;
+        int test = 4000000;
+        long start1, start2, start3, end1, end2, end3, totalTime1, totalTime2, totalTime3;
 
-        
+
         MinBinaryheap heap = new MinBinaryheap(test);
         FibonacciHeap fibHeap = new FibonacciHeap();
         PriorityQueue javaHeap = new PriorityQueue();
-        
+        System.gc();
+        System.gc();
+
         start1 = System.currentTimeMillis();
 
-        for (int i = test-1; i >=  0 ; i--) {
-
+        for (int i = test - 1; i >= 0; i--) {
             FibonacciNode node = new FibonacciNode(i);
-
             fibHeap.heapInsert(node);
         }
 
         end1 = System.currentTimeMillis();
+        System.gc();
+        System.gc();
 
         start2 = System.currentTimeMillis();
 
-        for (int i = test-1; i >= 0 ; i--) {
-
+        for (int i = test - 1; i >= 0; i--) {
             heap.heapInsert(i);
-
         }
 
         end2 = System.currentTimeMillis();
+        System.gc();
+        System.gc();
 
         start3 = System.currentTimeMillis();
 
-        for (int i = test-1; i >= 0 ; i--) {
-
+        for (int i = test - 1; i >= 0; i--) {
             javaHeap.add(i);
-
         }
-        
+
         end3 = System.currentTimeMillis();
 
 
@@ -67,7 +64,7 @@ public class Main {
 
         System.out.println("Time of inserting " + test + " times to Fibonacci-heap " + totalTime1 + " milliseconds");
         System.out.println("Time of inserting " + test + " times to binaryheap " + totalTime2 + " milliseconds");
-        System.out.println("Time of inserting " + test + " times to Java-heap " + totalTime3 + " milliseconds");
+        System.out.println("Time of inserting " + test + " times to Java priotyqueue " + totalTime3 + " milliseconds");
 
 
         start1 = System.currentTimeMillis();
@@ -78,7 +75,6 @@ public class Main {
         }
 
         end1 = System.currentTimeMillis();
-
         start2 = System.currentTimeMillis();
 
         for (int i = 0; i < test; i++) {
@@ -86,13 +82,10 @@ public class Main {
         }
 
         end2 = System.currentTimeMillis();
-
         start3 = System.currentTimeMillis();
 
-        for (int i = test-1; i >= 0 ; i--) {
-
+        for (int i = test - 1; i >= 0; i--) {
             javaHeap.poll();
-
         }
 
         end3 = System.currentTimeMillis();
@@ -103,8 +96,8 @@ public class Main {
 
         System.out.println("Time of deleting min " + test + " times from Fibonacci-heap " + totalTime1 + " milliseconds");
         System.out.println("Time of deleting min " + test + " times from binaryheap " + totalTime2 + " milliseconds");
-        System.out.println("Time of deleting min " + test + " times from Javaheap " + totalTime3 + " milliseconds");
-        
+        System.out.println("Time of deleting min " + test + " times from Java priorityqueue " + totalTime3 + " milliseconds");
+
 
         /*
         FibonacciNode fib2 = new FibonacciNode(2);
@@ -149,44 +142,44 @@ public class Main {
         fibHeap.printRootList();
         fibHeap.printMinChild();
         fibHeap.printMinSibling();
-        */
+         */
         /*
         FibonacciNode res = null;
         int missing = 0;
         
         for (int i = 5000; i >= 0; i--) {
 
-            FibonacciNode node = new FibonacciNode(i);
+        FibonacciNode node = new FibonacciNode(i);
 
-            System.out.println("--------------");
-            fibHeap.heapInsert(node);
-            
-            fibHeap.printRootList();
-            
+        System.out.println("--------------");
+        fibHeap.heapInsert(node);
+
+        fibHeap.printRootList();
+
         }
 
         for (int i = 0; i < 5000; i++) {
-            System.out.println("---------------");
-            
-            fibHeap.printRootList();
-            
-            fibHeap.printMinChild();
-            fibHeap.printMinSibling();
-            
-            res = fibHeap.heapDeleteMin();
+        System.out.println("---------------");
 
-            if (res != null) {
-                if (res.getKey() != i) {
-                    missing++;
-                }
-                System.out.println("**************************************");
-                System.out.println("deleted should be " + i + " deleted was = " + res.getKey());
-                System.out.println("**************************************");
-            }
+        fibHeap.printRootList();
+
+        fibHeap.printMinChild();
+        fibHeap.printMinSibling();
+
+        res = fibHeap.heapDeleteMin();
+
+        if (res != null) {
+        if (res.getKey() != i) {
+        missing++;
+        }
+        System.out.println("**************************************");
+        System.out.println("deleted should be " + i + " deleted was = " + res.getKey());
+        System.out.println("**************************************");
+        }
         }
 
         System.out.println("missing " +  missing);
-        */
+         */
         /*
         System.out.println("---------------------------");
         System.out.println("deleted was = " + fibHeap.heapDeleteMin());
@@ -200,7 +193,7 @@ public class Main {
         System.out.println("---------------------------");
         System.out.println("deleted was = " + fibHeap.heapDeleteMin());
         System.out.println("---------------------------");
-        */
+         */
         /*
         System.out.println(fibHeap.heapMin());
 
@@ -212,7 +205,7 @@ public class Main {
 
         
         System.out.println("min = " + fibHeap.heapMin());
-        */
+         */
 
         /*
         FibonacciHeap fibHeap2 = new FibonacciHeap();
@@ -242,7 +235,7 @@ public class Main {
 
         System.out.println("rootlist of 3 ");
         fibHeap3.printRootList();
-        */
+         */
 
 
     }

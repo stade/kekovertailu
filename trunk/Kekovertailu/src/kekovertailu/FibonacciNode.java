@@ -7,6 +7,8 @@ package kekovertailu;
 /**
  *
  * @author tatutahv
+ *
+ * This class implements nodes of Fibonacci-heap datastructure
  */
 public class FibonacciNode {
 
