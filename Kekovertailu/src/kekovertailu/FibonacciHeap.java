@@ -7,6 +7,8 @@ package kekovertailu;
 /**
  *
  * @author tatutahv
+ *
+ * This class implements datastructure known as Fibonacci-heap
  */
 public class FibonacciHeap {
 
@@ -59,8 +61,8 @@ public class FibonacciHeap {
         numNodes = numNodes + 1;
     }
 
-    public int heapMin() {
-        return min.getKey();
+    public FibonacciNode heapMin() {
+        return min;
     }
 
     // Deletes and returns minimum node of Fibonacci-heap
@@ -176,7 +178,7 @@ public class FibonacciHeap {
     private void consolidate() {
 
         // Calculater max degree of heaps in rootlist
-        int maxDegree = 1 +(int) maxDegree(numNodes);
+        int maxDegree = (int) maxDegree(numNodes);
         /*
         System.out.println("maxDegree: " + maxDegree);
         System.out.println("num of nodes: " + numNodes);
@@ -559,7 +561,7 @@ public class FibonacciHeap {
         }
         else {
             res = (Math.log(n) / Math.log((1 + Math.sqrt(5))/2));
-            res = Math.round(res);
+            res = Math.ceil(res);
             return res;
         }
     }
