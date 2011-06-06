@@ -21,6 +21,7 @@ public class Main {
         FibonacciHeap fibHeap = new FibonacciHeap();
 
 
+
         /*
         int test = 4000000;
         long start1, start2, start3, end1, end2, end3, totalTime1, totalTime2, totalTime3;
@@ -161,8 +162,9 @@ public class Main {
             System.out.println("--------------");
             fibHeap.heapInsert(node);
 
+            /*
             fibHeap.printRootList();
-
+            */
         }
 
         System.out.println("heapsize = "+ fibHeap.getNumNodes());
@@ -171,10 +173,10 @@ public class Main {
             System.out.println("---------------");
 
             fibHeap.printRootList();
-
+            /*
             fibHeap.printMinChild();
             fibHeap.printMinSibling();
-
+            */
             res = fibHeap.heapDeleteMin();
 
             if (res != null) {
