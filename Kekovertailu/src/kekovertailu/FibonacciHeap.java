@@ -80,7 +80,7 @@ public class FibonacciHeap {
             if (child != null) {
 
                 // If min has only one child
-                if (child.getLeft().equals(child)) {
+                if (child.getLeft().equals(child) && child.getRight().equals(child)) {
 
                     FibonacciNode temp = min.getLeft();
 
@@ -93,6 +93,8 @@ public class FibonacciHeap {
                     temp.setRight(child);
 
                     child.setParent(null);
+
+                    printRootList();
 
                 }
                 // If min has more than one child
@@ -141,6 +143,8 @@ public class FibonacciHeap {
                     temp.setRight(child);
 
                     child.setParent(null);
+
+                    printRootList();
                 }
             }
             FibonacciNode leftToMin = min.getLeft();
@@ -224,12 +228,12 @@ public class FibonacciHeap {
             System.out.println("right of x: " + x.getRight().getKey());
             
             degree = x.getDegree();
-            /*
+            
             System.out.println("Current degree is: " + degree);
-            */
-            /*
+            
+            
             printRootList();
-            */
+            
             while (degreeArray[degree] != null) {
                 y = degreeArray[degree];
                 
@@ -536,12 +540,22 @@ public class FibonacciHeap {
 
     public void printRootList() {
         FibonacciNode temp = min;
-
+        boolean err = false;
         if (min != null) {
-            do {
 
-                System.out.print(" " + temp.getKey());
-            
+            System.out.print("Rootlist: ");
+
+            do {
+                if (temp.getRight() == null) {
+                    System.out.println("Right node was null error");
+                    err = true;
+                    break;
+                }
+                else {
+                    System.out.print(" " + temp.getKey());
+                }
+
+
                 temp = temp.getRight();
             }
             while (!temp.equals(min));
@@ -554,9 +568,14 @@ public class FibonacciHeap {
     }
     public void printMinSibling() {
 
-        if (min!= null) {
+        if (min != null) {
+            if (min.getRight() != null) {
+                System.out.println("left of min = " + min.getLeft().getKey() + " right of min = " + min.getRight().getKey() + " min ifself " + min.getKey());
+            }
+            else {
+                System.out.println("left of min = " + min.getLeft().getKey() + " right of min = null" + " min ifself " + min.getKey());
+            }
 
-            System.out.println("left of min = " + min.getLeft().getKey() + " right of min = " + min.getRight().getKey() + " min ifself " + min.getKey());
         }
 
     }
@@ -565,7 +584,16 @@ public class FibonacciHeap {
         if (min != null) {
             if (min.getChild() != null) {
                 System.out.println("Child of min " + min.getChild().getKey());
-                System.out.println("Parent of child of min "+ min.getChild().getParent().getKey());
+
+                if (min.getChild().getParent() != null) {
+
+                    System.out.println("Parent of child of min "+ min.getChild().getParent().getKey());
+
+                }
+                else {
+                     System.out.println("Parent of child of min is null");
+                }
+
                 System.out.println("left of child of min " + min.getChild().getLeft().getKey());
                 System.out.println("right of child of min " + min.getChild().getRight().getKey());
             }
