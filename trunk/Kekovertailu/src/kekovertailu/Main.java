@@ -153,7 +153,7 @@ public class Main {
         ArrayList<FibonacciNode> missing = new ArrayList();
         Random randomizer = new Random();
         
-        for (int i = 1 ; i < 40; i++) {
+        for (int i = 1 ; i < 1000; i++) {
         
             integer = randomizer.nextInt(i);
             FibonacciNode node = new FibonacciNode(integer);
@@ -169,7 +169,7 @@ public class Main {
 
         System.out.println("heapsize = "+ fibHeap.getNumNodes());
 
-        for (int i = 1; i < 40; i++) {
+        for (int i = 1; i < 1000; i++) {
             System.out.println("---------------");
 
             fibHeap.printRootList();
