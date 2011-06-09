@@ -62,34 +62,48 @@ public class FibonacciHeapTest {
      */
     @Test
     public void testHeapDeleteMin() {
-        System.out.println("heapDeleteMin");
-
-        int test = 10;
-        Random randomizer = new Random();
 
         FibonacciHeap instance = new FibonacciHeap();
-        FibonacciNode mayFail = new FibonacciNode(-1000);
+        FibonacciNode res = null;
+        FibonacciNode prevRes = null;
+        final int test = 1000;
+        int integer = 0;
+        ArrayList<FibonacciNode> missing = new ArrayList();
+        Random randomizer = new Random();
 
-        instance.heapInsert(mayFail);
+        for (int i = 1 ; i < test; i++) {
 
-        for (int i = test; i > 0; i--) {
-            FibonacciNode node = new FibonacciNode(i);
+            integer = randomizer.nextInt(i);
+            FibonacciNode node = new FibonacciNode(integer);
+            missing.add(node);
             instance.heapInsert(node);
         }
-        for (int i = test; i > 0; i--) {
-            instance.heapDeleteMin();
-        }
-       
-        int result = 0;
-        int expResult = 10;
+        for (int i = 1; i < test; i++) {
 
-        FibonacciNode resultNode = instance.heapDeleteMin();
+            res = instance.heapDeleteMin();
 
-        if (resultNode != null) {
-            result = resultNode.getKey();
+            if (i != 1) {
+                assertTrue(prevRes.getKey() <= res.getKey());
+            }
+
+            if (res != null) {
+                if (missing.contains(res)) {
+                    missing.remove(res);
+                }
+                System.out.println("**************************************");
+                System.out.println(" i =" + i + " deleted was = " + res.getKey());
+                System.out.println("**************************************");
+
+                prevRes = res;
+            }
         }
-        
-        assertEquals(expResult, result);
+        int i = 0;
+        FibonacciNode missingNode;
+        while (!missing.isEmpty()) {
+            missingNode = missing.remove(i);
+            System.out.println("Missing " + missingNode.getKey());
+        }
+        assertTrue(missing.isEmpty());  
     }
 
 
@@ -133,16 +147,54 @@ public class FibonacciHeapTest {
     @Test
     public void testHeapUnion() {
         System.out.println("heapUnion");
-        FibonacciHeap heap1 = null;
-        FibonacciHeap heap2 = null;
-        FibonacciHeap expResult = null;
-        FibonacciHeap result = FibonacciHeap.heapUnion(heap1, heap2);
-        assertEquals(expResult, result);
-
-
         
+        final int TEST1 = -100;
+        final int TEST2 = 100;
+        final int TEST3 = 200;
+        
+        
+        FibonacciHeap instance1 = new FibonacciHeap();
+        FibonacciHeap instance2 = new FibonacciHeap();
+        FibonacciHeap instance3 = new FibonacciHeap();
+        FibonacciNode node;
+        ArrayList<FibonacciNode> missing = new ArrayList();
+
+        for (int i = -200 ; i < TEST1; i++) {
+            node = new FibonacciNode(i);
+            instance1.heapInsert(node);
+            missing.add(node);
+        }
+        for (int i = 1 ; i < TEST2; i++) {
+            node = new FibonacciNode(i);
+            instance2.heapInsert(node);
+            missing.add(node);
+        }
+        for (int i = TEST2; i < TEST3; i++) {
+            node = new FibonacciNode(i);
+            instance3.heapInsert(node);
+             missing.add(node);
+        }
+
+
+        FibonacciHeap tempResult = FibonacciHeap.heapUnion(instance2, instance3);
+        FibonacciHeap result = FibonacciHeap.heapUnion(instance1, tempResult);
+
+        for (int i = 1; i < 300; i++) {
+
+            node = result.heapDeleteMin();
+
+            if (node != null) {
+                if (missing.contains(node)) {
+                    missing.remove(node);
+                }
+            }
+        }
+
+        FibonacciNode missingNode;
+        while (!missing.isEmpty()) {
+            missingNode = missing.remove(0);
+            System.out.println("Missing " + missingNode.getKey());
+        }
+        assertTrue(missing.isEmpty()); 
     }
-
-    
-
 }

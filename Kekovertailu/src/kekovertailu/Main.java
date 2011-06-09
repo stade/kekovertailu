@@ -18,8 +18,10 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        FibonacciHeap fibHeap = new FibonacciHeap();
+       
+        TUI tui = new TUI();
 
+        tui.start();
 
 
         /*
@@ -148,59 +150,6 @@ public class Main {
         }
         */
         
-        FibonacciNode res = null;
-        int integer = 0;
-        ArrayList<FibonacciNode> missing = new ArrayList();
-        Random randomizer = new Random();
-        
-        for (int i = 1 ; i < 1000; i++) {
-        
-            integer = randomizer.nextInt(i);
-            FibonacciNode node = new FibonacciNode(integer);
-            missing.add(node);
-
-            System.out.println("--------------");
-            fibHeap.heapInsert(node);
-
-            /*
-            fibHeap.printRootList();
-            */
-        }
-
-        System.out.println("heapsize = "+ fibHeap.getNumNodes());
-
-        for (int i = 1; i < 1000; i++) {
-            System.out.println("---------------");
-
-            fibHeap.printRootList();
-            /*
-            fibHeap.printMinChild();
-            fibHeap.printMinSibling();
-            */
-            res = fibHeap.heapDeleteMin();
-
-            if (res != null) {
-                
-                if (missing.contains(res)) {
-                    missing.remove(res);
-                    
-                }
-
-
-                 
-                System.out.println("**************************************");
-                System.out.println(" i =" + i + " deleted was = " + res.getKey());
-                System.out.println("**************************************");
-            }
-        }
-        int i = 0;
-        FibonacciNode missingNode;
-
-        while (!missing.isEmpty()) {
-            missingNode = missing.remove(i);
-            System.out.println("Missing " + missingNode.getKey());
-            
-        }
         /*
         System.out.println("---------------------------");
         System.out.println("deleted was = " + fibHeap.heapDeleteMin());
