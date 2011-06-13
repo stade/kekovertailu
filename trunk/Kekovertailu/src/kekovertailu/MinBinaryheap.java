@@ -106,7 +106,7 @@ public class MinBinaryheap {
         minHeapify(0);
         return min;
     }
-
+    //TODO: ERROR HANDLING
     public void heapDecKey(int i, int newk) {
         int temp;
 
@@ -144,7 +144,7 @@ public class MinBinaryheap {
         while (i < newSize) {
 
             if (j <= heap1.getHeapsize()-1) {
-                System.out.println ("i = " + i + " j= " + j + " ");
+                //System.out.println ("i = " + i + " j= " + j + " ");
                 mergeHeap.array[i] = heap1.array[j];
                 mergeHeap.addHeapsize();
                 i++;
@@ -152,7 +152,7 @@ public class MinBinaryheap {
 
             } 
             else {
-                System.out.println ("i = " + i + " k= " + k + " ");
+                //System.out.println ("i = " + i + " k= " + k + " ");
 
                 mergeHeap.array[i] = heap2.array[k];
                 mergeHeap.addHeapsize();
