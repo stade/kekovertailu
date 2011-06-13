@@ -151,6 +151,8 @@ public class FibonacciHeapTest {
         final int TEST1 = -100;
         final int TEST2 = 100;
         final int TEST3 = 200;
+        Random randomizer = new Random();
+        int integer = 0;
         
         
         FibonacciHeap instance1 = new FibonacciHeap();
@@ -160,17 +162,20 @@ public class FibonacciHeapTest {
         ArrayList<FibonacciNode> missing = new ArrayList();
 
         for (int i = -200 ; i < TEST1; i++) {
-            node = new FibonacciNode(i);
+            integer = randomizer.nextInt();
+            node = new FibonacciNode(integer);
             instance1.heapInsert(node);
             missing.add(node);
         }
         for (int i = 1 ; i < TEST2; i++) {
-            node = new FibonacciNode(i);
+            integer = randomizer.nextInt();
+            node = new FibonacciNode(integer);
             instance2.heapInsert(node);
             missing.add(node);
         }
         for (int i = TEST2; i < TEST3; i++) {
-            node = new FibonacciNode(i);
+            integer = randomizer.nextInt();
+            node = new FibonacciNode(integer);
             instance3.heapInsert(node);
              missing.add(node);
         }
