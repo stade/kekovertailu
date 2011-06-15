@@ -14,37 +14,40 @@ public class MinBinaryheap {
 
     private int[] array;
     private int heapsize;
+    private int arraysize;
 
     public MinBinaryheap() {
         this.array = new int[10];
         this.heapsize = 0;
+        this.arraysize = 10;
     }
 
     public MinBinaryheap(int s) {
         this.array = new int[s];
         this.heapsize = 0;
+        this.arraysize = s;
     }
 
     public int getHeapsize() {
         return this.heapsize;
     }
+
     public void addHeapsize() {
         this.heapsize++;
     }
     // Returns parent of given index of a node.
-
-    public int parent(int i) {
+    private int parent(int i) {
         double d = (double) i;
         d = Math.floor((d - 1) / 2);
         return (int) d;
 
     }
     // Returns left child of given index of a node.
-    public int leftchild(int i) {
+    private int leftchild(int i) {
         return (2 * i) + 1;
     }
     // Returns right child of given index of a node.
-    public int rightchild(int i) {
+    private int rightchild(int i) {
         return (2 * i) + 2;
     }
 
@@ -80,7 +83,7 @@ public class MinBinaryheap {
         return array[0];
     }
 
-    public void heapInsert(int k) {
+    public void insert(int k) {
         int i = 0;
 
         heapsize = heapsize + 1;
@@ -97,7 +100,8 @@ public class MinBinaryheap {
             array[i] = k;
         }
     }
-    public int heapDelMin() {
+
+    public int delMin() {
         int min;
 
         min = array[0];
@@ -106,32 +110,38 @@ public class MinBinaryheap {
         minHeapify(0);
         return min;
     }
-    //TODO: ERROR HANDLING
-    public void heapDecKey(int i, int newk) {
-        int temp;
 
-        if (newk < array[i]) {
-            array[i] = newk;
-            while ((i > 0) && (array[parent(i)] > array[i])) {
-                temp = array[i];
-                array[i] = array[parent(i)];
-                array[parent(i)] = temp;
-                i = parent(i);
+    public void decKey(int i, int newk) {
+
+        if (i < 0 || i > arraysize) {
+            System.out.println("Invalid index");
+        } else {
+            int temp;
+            if (newk < array[i]) {
+                array[i] = newk;
+                while ((i > 0) && (array[parent(i)] > array[i])) {
+                    temp = array[i];
+                    array[i] = array[parent(i)];
+                    array[parent(i)] = temp;
+                    i = parent(i);
+                }
             }
         }
     }
+
     public void heapPrint() {
 
         int i = 0;
 
         System.out.print("Contents of heap ");
 
-        while (i <= heapsize-1) {
+        while (i <= heapsize - 1) {
 
             System.out.print(" " + array[i] + " ");
             i++;
         }
     }
+
     public static MinBinaryheap merge(MinBinaryheap heap1, MinBinaryheap heap2) {
 
         int newSize = heap1.getHeapsize() + heap2.getHeapsize();
@@ -143,15 +153,14 @@ public class MinBinaryheap {
 
         while (i < newSize) {
 
-            if (j <= heap1.getHeapsize()-1) {
+            if (j <= heap1.getHeapsize() - 1) {
                 //System.out.println ("i = " + i + " j= " + j + " ");
                 mergeHeap.array[i] = heap1.array[j];
                 mergeHeap.addHeapsize();
                 i++;
                 j++;
 
-            } 
-            else {
+            } else {
                 //System.out.println ("i = " + i + " k= " + k + " ");
 
                 mergeHeap.array[i] = heap2.array[k];

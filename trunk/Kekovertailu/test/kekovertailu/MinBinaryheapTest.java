@@ -38,81 +38,17 @@ public class MinBinaryheapTest {
         assertEquals(expResult, result);
 
     }
-
-    /**
-     * Test of parent method, of class MinBinaryheap.
-     */
-    @Test
-    public void testParent() {
-
-        System.out.println("parent");
-        int i = 2;
-        MinBinaryheap instance = new MinBinaryheap();
-        int expResult = 0;
-        int result = instance.parent(i);
-        assertEquals(expResult, result);
-
-    }
-
-    /**
-     * Test of leftchild method, of class MinBinaryheap.
-     */
-    @Test
-    public void testLeftchild() {
-
-        System.out.println("leftchild");
-        int i = 0;
-        MinBinaryheap instance = new MinBinaryheap();
-        int expResult = 1;
-        int result = instance.leftchild(i);
-        assertEquals(expResult, result);
-
-    }
-
-    /**
-     * Test of rightchild method, of class MinBinaryheap.
-     */
-    @Test
-    public void testRightchild() {
-
-        System.out.println("rightchild");
-        int i = 0;
-        MinBinaryheap instance = new MinBinaryheap();
-        int expResult = 2;
-        int result = instance.rightchild(i);
-        assertEquals(expResult, result);
-
-    }
-
-    /**
-     * Test of minHeapify method, of class MinBinaryheap.
-     */
-    @Test
-    public void testMinHeapify() {
-
-        System.out.println("minHeapify");
-        int expResult = 2;
-        MinBinaryheap instance = new MinBinaryheap();
-        instance.heapInsert(3);
-        instance.heapInsert(2);
-        instance.heapInsert(1);
-        instance.heapDelMin();
-        int result = instance.heapDelMin();
-        assertEquals(expResult, result);
-
-    }
-
     /**
      * Test of heapMin method, of class MinBinaryheap.
      */
     @Test
-    public void testHeapMin() {
+    public void testMin() {
 
-        System.out.println("heapMin");
+        System.out.println("Min");
         MinBinaryheap instance = new MinBinaryheap();
-        instance.heapInsert(3);
-        instance.heapInsert(1);
-        instance.heapInsert(2);
+        instance.insert(3);
+        instance.insert(1);
+        instance.insert(2);
         int result = instance.heapMin();
         int expResult = 1;
         assertEquals(expResult, result);
@@ -123,12 +59,12 @@ public class MinBinaryheapTest {
      * Test of heapInsert method, of class MinBinaryheap.
      */
     @Test
-    public void testHeapInsert() {
+    public void testInsert() {
 
-        System.out.println("heapInsert");
+        System.out.println("Insert");
         int k = 55;
         MinBinaryheap instance = new MinBinaryheap();
-        instance.heapInsert(k);
+        instance.insert(k);
         int result = instance.heapMin();
         int expResult = 55;
         assertEquals(expResult, result);
@@ -139,16 +75,16 @@ public class MinBinaryheapTest {
      * Test of heapDelMin method, of class MinBinaryheap.
      */
     @Test
-    public void testHeapDelMin() {
+    public void testDelMin() {
 
-        System.out.println("heapDelMin");
+        System.out.println("DelMin");
         int a = 33;
         int b = 66;
         MinBinaryheap instance = new MinBinaryheap();
-        instance.heapInsert(b);
-        instance.heapInsert(a);
+        instance.insert(b);
+        instance.insert(a);
         int expResult = 33;
-        int result = instance.heapDelMin();
+        int result = instance.delMin();
         assertEquals(expResult, result);
 
     }
@@ -157,15 +93,15 @@ public class MinBinaryheapTest {
      * Test of heapDecKey method, of class MinBinaryheap.
      */
     @Test
-    public void testHeapDecKey() {
+    public void testDecKey() {
 
-        System.out.println("heapDecKey");
+        System.out.println("DecKey");
         int i = 0;
         int newk = 22;
         MinBinaryheap instance = new MinBinaryheap();
-        instance.heapInsert(33);
-        instance.heapDecKey(i, newk);
-        int result = instance.heapDelMin();
+        instance.insert(33);
+        instance.decKey(i, newk);
+        int result = instance.delMin();
         int expResult = 22;
         assertEquals(expResult, result);
 

@@ -32,13 +32,13 @@ public class FibonacciHeapTest {
      * Test of heapInsert method, of class FibonacciHeap.
      */
     @Test
-    public void testHeapInsert() {
-        System.out.println("heapInsert");
+    public void testInsert() {
+        System.out.println("Insert");
         boolean expResult = true;
         FibonacciNode node = new FibonacciNode(300);
         FibonacciHeap instance = new FibonacciHeap();
-        instance.heapInsert(node);
-        boolean result = node.equals(instance.heapMin());
+        instance.insert(node);
+        boolean result = node.equals(instance.min());
         assertEquals(expResult,result);
     }
 
@@ -46,13 +46,13 @@ public class FibonacciHeapTest {
      * Test of heapMin method, of class FibonacciHeap.
      */
     @Test
-    public void testHeapMin() {
-        System.out.println("heapMin");
+    public void testMin() {
+        System.out.println("Min");
         FibonacciHeap instance = new FibonacciHeap();
         FibonacciNode node = new FibonacciNode(3);
-        instance.heapInsert(node);
+        instance.insert(node);
         FibonacciNode expResult = node;
-        FibonacciNode result = instance.heapMin();
+        FibonacciNode result = instance.min();
         assertEquals(expResult, result);
         
     }
@@ -61,14 +61,14 @@ public class FibonacciHeapTest {
      * Test of heapDeleteMin method, of class FibonacciHeap.
      */
     @Test
-    public void testHeapDeleteMin() {
-
+    public void testDeleteMin() {
+        System.out.println("DeleteMin");
         FibonacciHeap instance = new FibonacciHeap();
         FibonacciNode res = null;
         FibonacciNode prevRes = null;
         final int test = 1000;
         int integer = 0;
-        ArrayList<FibonacciNode> missing = new ArrayList();
+        ArrayList<FibonacciNode> missing = new ArrayList<FibonacciNode>();
         Random randomizer = new Random();
 
         for (int i = 1 ; i < test; i++) {
@@ -76,11 +76,11 @@ public class FibonacciHeapTest {
             integer = randomizer.nextInt(i);
             FibonacciNode node = new FibonacciNode(integer);
             missing.add(node);
-            instance.heapInsert(node);
+            instance.insert(node);
         }
         for (int i = 1; i < test; i++) {
 
-            res = instance.heapDeleteMin();
+            res = instance.deleteMin();
 
             if (i != 1) {
                 assertTrue(prevRes.getKey() <= res.getKey());
@@ -111,8 +111,8 @@ public class FibonacciHeapTest {
      * Test of heapDecKey method, of class FibonacciHeap.
      */
     @Test
-    public void testHeapDecKey() {
-        System.out.println("heapDecKey");
+    public void testDecKey() {
+        System.out.println("DecKey");
 
         int test = 1000;
         int result = 0;
@@ -121,17 +121,17 @@ public class FibonacciHeapTest {
 
         for (int i = test; i > 0; i--) {
             FibonacciNode node = new FibonacciNode(i);
-            instance.heapInsert(node);
+            instance.insert(node);
         }
 
-        instance.heapInsert(x);
+        instance.insert(x);
 
         int newkey = -1000;
         int expResult = newkey;
         
-        instance.heapDecKey(x, newkey);
+        instance.decKey(x, newkey);
 
-        FibonacciNode resultNode = instance.heapDeleteMin();
+        FibonacciNode resultNode = instance.deleteMin();
 
         if (resultNode != null) {
             result = resultNode.getKey();
@@ -145,8 +145,8 @@ public class FibonacciHeapTest {
      * Test of heapUnion method, of class FibonacciHeap.
      */
     @Test
-    public void testHeapUnion() {
-        System.out.println("heapUnion");
+    public void testMerge() {
+        System.out.println("Merge");
         
         final int TEST1 = -100;
         final int TEST2 = 100;
@@ -159,34 +159,34 @@ public class FibonacciHeapTest {
         FibonacciHeap instance2 = new FibonacciHeap();
         FibonacciHeap instance3 = new FibonacciHeap();
         FibonacciNode node;
-        ArrayList<FibonacciNode> missing = new ArrayList();
+        ArrayList<FibonacciNode> missing = new ArrayList<FibonacciNode>();
 
         for (int i = -200 ; i < TEST1; i++) {
             integer = randomizer.nextInt();
             node = new FibonacciNode(integer);
-            instance1.heapInsert(node);
+            instance1.insert(node);
             missing.add(node);
         }
         for (int i = 1 ; i < TEST2; i++) {
             integer = randomizer.nextInt();
             node = new FibonacciNode(integer);
-            instance2.heapInsert(node);
+            instance2.insert(node);
             missing.add(node);
         }
         for (int i = TEST2; i < TEST3; i++) {
             integer = randomizer.nextInt();
             node = new FibonacciNode(integer);
-            instance3.heapInsert(node);
+            instance3.insert(node);
              missing.add(node);
         }
 
 
-        FibonacciHeap tempResult = FibonacciHeap.heapUnion(instance2, instance3);
-        FibonacciHeap result = FibonacciHeap.heapUnion(instance1, tempResult);
+        FibonacciHeap tempResult = FibonacciHeap.merge(instance2, instance3);
+        FibonacciHeap result = FibonacciHeap.merge(instance1, tempResult);
 
         for (int i = 1; i < 300; i++) {
 
-            node = result.heapDeleteMin();
+            node = result.deleteMin();
 
             if (node != null) {
                 if (missing.contains(node)) {

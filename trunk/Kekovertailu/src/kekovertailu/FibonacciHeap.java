@@ -12,8 +12,8 @@ package kekovertailu;
  */
 public class FibonacciHeap {
 
-     private static final double oneOverLogPhi =
-        1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);
+    //private static final double oneOverLogPhi =
+        //1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);
 
     private FibonacciNode min;
     private int numNodes;
@@ -31,7 +31,7 @@ public class FibonacciHeap {
     }
     
 
-    public void heapInsert(FibonacciNode node) {
+    public void insert(FibonacciNode node) {
 
         // If heap is empty node becames min
         if (min == null) {
@@ -70,12 +70,12 @@ public class FibonacciHeap {
         numNodes = numNodes + 1;
     }
 
-    public FibonacciNode heapMin() {
-        return min;
+    public FibonacciNode min() {
+        return this.min;
     }
 
     // Deletes and returns minimum node of Fibonacci-heap
-    public FibonacciNode heapDeleteMin() {
+    public FibonacciNode deleteMin() {
 
         FibonacciNode toBeDeleted = min;
         FibonacciNode temp = null;
@@ -254,7 +254,8 @@ public class FibonacciHeap {
     private void consolidate() {
 
         // Calculater max degree of heaps in rootlist
-        int maxDegree = 2 + ((int) Math.floor(Math.log(numNodes) * oneOverLogPhi)) + 1;
+        int maxDegree = (int) maxDegree(numNodes);
+                //((int) Math.floor(Math.log(numNodes) * oneOverLogPhi)) + 1;
 
         if (test) {
             System.out.println("maxDegree: " + maxDegree);
@@ -429,7 +430,7 @@ public class FibonacciHeap {
     }
 
     // Heaplink makes y a child of x
-    public void heapLink(FibonacciNode y, FibonacciNode x) {
+    private void heapLink(FibonacciNode y, FibonacciNode x) {
 
         if (test) {
             System.out.println(y.getKey() + " comes child of " + x.getKey());
@@ -495,7 +496,7 @@ public class FibonacciHeap {
         x.setDegree(x.getDegree()+1);
         y.setMark(false);
     }
-    public void heapDecKey (FibonacciNode x, int newkey) {
+    public void decKey (FibonacciNode x, int newkey) {
 
         FibonacciNode y = null;
         /*
@@ -511,7 +512,7 @@ public class FibonacciHeap {
             System.out.println("left of x = " + x.getLeft().getKey() + " right of x = " + x.getRight().getKey() + " x ifself " + x.getKey() + " x parent " + x.getParent().getKey());
             */
 
-            if ((y != null) && (x.getKey()< y.getKey())) {
+            if ((y != null) && (x.getKey() < y.getKey())) {
                 /*
                 System.out.println(x.getKey() + " is cut and cascaded");
                 */
@@ -531,7 +532,7 @@ public class FibonacciHeap {
             */
         }
     }
-    public void cut(FibonacciNode x, FibonacciNode y) {
+    private void cut(FibonacciNode x, FibonacciNode y) {
 
         FibonacciNode leftOfMin = min.getLeft();
 
@@ -561,7 +562,7 @@ public class FibonacciHeap {
         x.setMark(false);
 
     }
-    public void cascadingCut(FibonacciNode y) {
+    private void cascadingCut(FibonacciNode y) {
         FibonacciNode z = y.getParent();
         
         if (z != null) {
@@ -575,7 +576,7 @@ public class FibonacciHeap {
         }
     }
     // Merges two Fibonacci-heaps as one
-    public static FibonacciHeap heapUnion(FibonacciHeap heap1, FibonacciHeap heap2) {
+    public static FibonacciHeap merge(FibonacciHeap heap1, FibonacciHeap heap2) {
 
         FibonacciHeap unionHeap = new FibonacciHeap();
         FibonacciNode min1Right = null;
