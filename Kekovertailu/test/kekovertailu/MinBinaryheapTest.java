@@ -1,9 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package kekovertailu;
 
+import java.util.*;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -105,5 +103,61 @@ public class MinBinaryheapTest {
         int expResult = 22;
         assertEquals(expResult, result);
 
+    }
+    /**
+     * Test of heapDecKey method, of class MinBinaryheap.
+     */
+    @Test
+    public void testMerge() {
+
+        System.out.println("Merge");
+
+        final int TEST1 = -100;
+        final int TEST2 = 100;
+        final int TEST3 = 200;
+        int integer = 0, res = 0, index = 0;
+        Random randomizer = new Random();
+
+        MinBinaryheap instance1 = new MinBinaryheap(100);
+        MinBinaryheap instance2 = new MinBinaryheap(100);
+        MinBinaryheap instance3 = new MinBinaryheap(100);
+        
+        ArrayList<Integer> missing = new ArrayList<Integer>();
+
+        for (int i = -200 ; i < TEST1; i++) {
+            integer = randomizer.nextInt();
+            instance1.insert(integer);
+            missing.add(integer);
+        }
+        for (int i = 1 ; i < TEST2; i++) {
+            integer = randomizer.nextInt();
+            instance2.insert(integer);
+            missing.add(integer);
+        }
+        for (int i = TEST2; i < TEST3; i++) {
+            integer = randomizer.nextInt();
+            instance3.insert(integer);
+            missing.add(integer);
+        }
+
+        MinBinaryheap tempResult = MinBinaryheap.merge(instance2, instance3);
+        MinBinaryheap result = MinBinaryheap.merge(instance1, tempResult);
+
+        for (int i = 1; i < 300; i++) {
+
+            res = result.delMin();
+
+            if (missing.contains(res)) {
+                index = missing.indexOf(res);
+                missing.remove(index);
+            }
+        }
+
+        while (!missing.isEmpty()) {
+            res = missing.remove(0);
+            System.out.println("Missing " + res);
+        }
+        assertTrue(missing.isEmpty());
+        
     }
 }

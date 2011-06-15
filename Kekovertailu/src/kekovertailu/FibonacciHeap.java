@@ -1,14 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package kekovertailu;
 
 /**
  *
  * @author tatutahv
  *
- * This class implements datastructure known as Fibonacci-heap
+ * This class implements datastructure known as Fibonacciheap
  */
 public class FibonacciHeap {
 
@@ -30,7 +26,7 @@ public class FibonacciHeap {
         return numNodes;
     }
     
-
+    // Inserts Fibonaccinode to Fibonacciheap
     public void insert(FibonacciNode node) {
 
         // If heap is empty node becames min
@@ -70,11 +66,12 @@ public class FibonacciHeap {
         numNodes = numNodes + 1;
     }
 
+    // Returns minimum node of Fibonacciheap and keeps the min node in the heap
     public FibonacciNode min() {
         return this.min;
     }
 
-    // Deletes and returns minimum node of Fibonacci-heap
+    // Deletes and returns minimum node of Fibonacciheap
     public FibonacciNode deleteMin() {
 
         FibonacciNode toBeDeleted = min;
@@ -151,6 +148,7 @@ public class FibonacciHeap {
                             child.setLeft(min);
                             child.setRight(min);
                         }
+                        // Min is not the only node in the rootlist
                         else {
 
                             if(test) {
@@ -181,7 +179,8 @@ public class FibonacciHeap {
                        
                         //printRootList();
                         //printMinSibling();
-                    }
+                    }//Insert the last child to root list
+                    
                     if (min.getRight().equals(min)) {
 
                             if(test) {
@@ -199,7 +198,6 @@ public class FibonacciHeap {
 
                         temp = min.getLeft();
 
-                        // Insert the last child to root list
                         if(test) {
                             System.out.println("Adding to " + child.getKey() + " rootlist ");
                             System.out.println("this the last child to be inserted to rootlist");
@@ -231,7 +229,7 @@ public class FibonacciHeap {
             //  Min is the only node in heap
             if (min.getRight().equals(min) && min.getLeft().equals(min)) {
                 min = null;
-            } // There is more than one node in the heap
+            } // There is more than one node in the heap so consolidate must be done
             else {
                 min = min.getRight();
                 consolidate();
@@ -251,9 +249,10 @@ public class FibonacciHeap {
             return null;
         }
     }
+    //Modifies heaps structure to a state where every rootnodes tree has a different degree
     private void consolidate() {
 
-        // Calculater max degree of heaps in rootlist
+        // Calculate max degree of trees in rootlist
         int maxDegree = (int) maxDegree(numNodes);
                 //((int) Math.floor(Math.log(numNodes) * oneOverLogPhi)) + 1;
 
@@ -262,15 +261,15 @@ public class FibonacciHeap {
             System.out.println("num of nodes: " + numNodes);
         }
 
-        // Degree array size is the max degree of heap in rootlist
+        // Degree array size is the max degree of heaps in rootlist
         FibonacciNode[] degreeArray = new FibonacciNode[maxDegree];
 
-
+        // Set every reference to point null
         for (int i = 0; i < maxDegree; i++) {
             degreeArray[i] = null;
         }
 
-        //FibonacciNode end = min;
+        
         FibonacciNode x = min;
         
         //System.out.println("At the begin min is: " + min.getKey() + " and end is: " + end.getKey());
@@ -281,6 +280,7 @@ public class FibonacciHeap {
         int numRoots = 0;
         x = min;
 
+        // Count number of rootnodes
         if (x != null) {
             numRoots++;
             x = x.getRight();
@@ -293,8 +293,8 @@ public class FibonacciHeap {
 
         //printRootList();
         
-        // Goes through every node in rootlist. After this loop finises there is
-        // no trees with same degree in fibonacci-heap
+        // Goes through every node in rootlist. After this loop finishes there is
+        // no trees with same degree in fibonacciheap
         while (numRoots > 0) {
             
             FibonacciNode next = x.getRight();
@@ -508,14 +508,11 @@ public class FibonacciHeap {
         else {
             x.setKey(newkey);
             y = x.getParent();
-            /*
-            System.out.println("left of x = " + x.getLeft().getKey() + " right of x = " + x.getRight().getKey() + " x ifself " + x.getKey() + " x parent " + x.getParent().getKey());
-            */
-
+            
             if ((y != null) && (x.getKey() < y.getKey())) {
-                /*
+                
                 System.out.println(x.getKey() + " is cut and cascaded");
-                */
+                
                 cut(x,y);
                 cascadingCut(y);
             }

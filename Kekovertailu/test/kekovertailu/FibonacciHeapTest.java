@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package kekovertailu;
 
@@ -29,7 +25,7 @@ public class FibonacciHeapTest {
     }
 
     /**
-     * Test of heapInsert method, of class FibonacciHeap.
+     * Test of Insert method, of class FibonacciHeap.
      */
     @Test
     public void testInsert() {
@@ -43,7 +39,7 @@ public class FibonacciHeapTest {
     }
 
     /**
-     * Test of heapMin method, of class FibonacciHeap.
+     * Test of Min method, of class FibonacciHeap.
      */
     @Test
     public void testMin() {
@@ -58,7 +54,7 @@ public class FibonacciHeapTest {
     }
 
     /**
-     * Test of heapDeleteMin method, of class FibonacciHeap.
+     * Test of DeleteMin method, of class FibonacciHeap.
      */
     @Test
     public void testDeleteMin() {
@@ -99,50 +95,55 @@ public class FibonacciHeapTest {
         }
         int i = 0;
         FibonacciNode missingNode;
+
+        assertTrue(missing.isEmpty());  
+
         while (!missing.isEmpty()) {
             missingNode = missing.remove(i);
             System.out.println("Missing " + missingNode.getKey());
         }
-        assertTrue(missing.isEmpty());  
+        
     }
 
 
     /**
-     * Test of heapDecKey method, of class FibonacciHeap.
+     * Test of decKey method, of class FibonacciHeap.
      */
     @Test
     public void testDecKey() {
         System.out.println("DecKey");
-
-        int test = 1000;
-        int result = 0;
         FibonacciHeap instance = new FibonacciHeap();
-        FibonacciNode x = new FibonacciNode(test+1);
+        FibonacciNode node = new FibonacciNode();
+        ArrayList<FibonacciNode> fiblist = new ArrayList<FibonacciNode>();
 
-        for (int i = test; i > 0; i--) {
-            FibonacciNode node = new FibonacciNode(i);
+        for (int i = 0; i < 10; i++) {
+            node = new FibonacciNode(i);
             instance.insert(node);
+            fiblist.add(node);
         }
 
-        instance.insert(x);
+        instance.deleteMin();
 
-        int newkey = -1000;
-        int expResult = newkey;
-        
-        instance.decKey(x, newkey);
+        node = fiblist.get(8);
 
-        FibonacciNode resultNode = instance.deleteMin();
+        instance.decKey(node, 0);
 
-        if (resultNode != null) {
-            result = resultNode.getKey();
-        }
+        node = instance.deleteMin();
 
-        assertEquals(expResult,result);  
+        node = instance.deleteMin();
+
+        assertEquals(1, node.getKey());
+
+        node = instance.min();
+
+        assertEquals(2, node.getKey());
+
+
     }
 
    
     /**
-     * Test of heapUnion method, of class FibonacciHeap.
+     * Test of Merge method, of class FibonacciHeap.
      */
     @Test
     public void testMerge() {

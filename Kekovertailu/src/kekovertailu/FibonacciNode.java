@@ -1,7 +1,6 @@
 
 package kekovertailu;
 
-
 /**
  * FibonacciNode <code>FibonacciNode</code> Implements nodes of Fibonacci-heap datastructure.
  *
