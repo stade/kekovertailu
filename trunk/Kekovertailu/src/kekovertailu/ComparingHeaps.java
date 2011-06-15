@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package kekovertailu;
 
 import java.util.*;
@@ -11,7 +8,7 @@ import java.util.*;
  * @author Tatu Tahvanainen
  */
 public class ComparingHeaps {
-
+    // Compares insert method of binaryheap, Fibonacciheap and Java's prioryqueue
     public static void insert(int test, int testcount) {
         int integer = 0;
         double start1, start2, start3, end1, end2, end3, totalTime1 = 0, totalTime2 = 0, totalTime3 = 0;
@@ -69,7 +66,7 @@ public class ComparingHeaps {
         System.out.println("Average time of inserting " + test + " times to Java priotyqueue " + totalTime3 / testcount + " milliseconds");
 
     }
-
+    // Compares findmin method of binaryheap, Fibonacciheap and Java's prioryqueue
     public static void findmin(int test, int testcount) {
          int integer = 0;
         double start1, start2, start3, end1, end2, end3, totalTime1 = 0, totalTime2 = 0, totalTime3 = 0;
@@ -137,7 +134,7 @@ public class ComparingHeaps {
 
 
     }
-
+    // Compares deletemin method of binaryheap, Fibonacciheap and Java's prioryqueue
     public static void deleteMin(int test, int testcount) {
         int integer = 0;
         double start1, start2, start3, end1, end2, end3, totalTime1 = 0, totalTime2 = 0, totalTime3 = 0;
@@ -205,28 +202,31 @@ public class ComparingHeaps {
         System.out.println("Average time of deleting min " + test + " times from Java priorityqueue " + totalTime3/testcount + " milliseconds");
 
     }
-
-    public static void degreaseKey(int test,int testcount, int degreasecount) {
+    // Compares decrease key method of binaryheap and Fibonacciheap
+    public static void decreaseKey(int test,int testcount, int degreasecount) {
         int integer = 0, key = 0;
         long start1, start2, end1, end2, totalTime1 = 0, totalTime2 = 0;
         Random randomizer = new Random();
-        int pseudoRandomIndex = test/2;
+        int pseudoRandomIndex = test-1;
         FibonacciNode pseudoRandomNode = null;
         FibonacciNode node;
         MinBinaryheap binHeap = new MinBinaryheap(test);
         FibonacciHeap fibHeap = new FibonacciHeap();
         
-        for (int i = test; i > 0; i--) {
+        for (int i = test+1; i > 0; i--) {
 
             integer = randomizer.nextInt(i);
             node = new FibonacciNode(integer);
             fibHeap.insert(node);
 
-            if(i == test/2) {
+            if(i == test-2) {
                 pseudoRandomNode = node;
             }
 
         }
+
+        fibHeap.deleteMin();
+
         for (int i = test; i > 0; i--) {
             integer = randomizer.nextInt(i);
             binHeap.insert(integer);
@@ -242,8 +242,9 @@ public class ComparingHeaps {
             start1 = System.nanoTime();
 
             for (int j = degreasecount; j > 0; j--) {
-                
 
+                fibHeap.deleteMin();
+                
                 key = pseudoRandomNode.getKey();
 
                 key = key--;
@@ -253,11 +254,13 @@ public class ComparingHeaps {
 
             end1 = System.nanoTime();
 
+            System.gc();
+            System.gc();
+
             start2 = System.nanoTime();
 
             for (int j = degreasecount; j > 0; j--) {
-
-                binHeap.decKey(pseudoRandomIndex,pseudoRandomIndex);
+                binHeap.decKey(pseudoRandomIndex,pseudoRandomIndex--);
             }
 
             end2 = System.nanoTime();
@@ -272,7 +275,7 @@ public class ComparingHeaps {
         System.out.println("Average time of degreasing a key " + degreasecount + " times in binaryheap " + totalTime2/testcount + " nanoseconds");
         
     }
-
+    // Compares merge method of binaryheap and Fibonacciheap
     public static void merge(int test, int testcount) {
         int integer = 0;
         double start1, start2, end1, end2, totalTime1 = 0, totalTime2 = 0;
@@ -339,6 +342,5 @@ public class ComparingHeaps {
         System.out.println("Comparing is done!");
         System.out.println("Average time of merging two Fibonacci-heaps with " + test + " nodes  " + totalTime1/testcount + " nanoseconds");
         System.out.println("Average time of merging two minimum binaryheaps with " + test + " nodes " + totalTime2/testcount + " nanoseconds");
-
     }
 }

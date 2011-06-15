@@ -1,22 +1,21 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package kekovertailu;
 
 /**
  *
  * @author tatutahv
  *
+ * Main-class handless the start of text-user-interface.
+ *
  */
 
 public class Main {
-
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
+
+        // Create instance of text-user-interface.
         TUI tui = new TUI();
+
+        // Start text-user-interface.
         tui.start();
     }
 }

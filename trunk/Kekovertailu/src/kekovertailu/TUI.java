@@ -1,12 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package kekovertailu;
+
 import java.util.Scanner;
 /**
- * Class TUI handles the text userinterface of heapcomparing
+ * Class TUI handles the text userinterface of heapcomparison
  *
  * @author Tatu Tahvanainen
  */
@@ -215,7 +212,7 @@ public class TUI {
             }
         }
 
-        ComparingHeaps.degreaseKey(numKeys, testTimes, decreaseCount);
+        ComparingHeaps.decreaseKey(numKeys, testTimes, decreaseCount);
         System.out.println("Press enter to return main menu");
         input.nextLine();
     }

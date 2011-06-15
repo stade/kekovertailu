@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package kekovertailu;
 
 /**
@@ -69,8 +66,8 @@ public class MinBinaryheap {
                 array[smallest] = temp;
 
                 minHeapify(smallest);
-
-            } else if ((l == heapsize) && (array[i] > array[l])) {
+            }
+            else if ((l == heapsize) && (array[i] > array[l])) {
                 temp = array[i];
                 array[i] = array[l];
                 array[l] = temp;
@@ -113,9 +110,10 @@ public class MinBinaryheap {
 
     public void decKey(int i, int newk) {
 
-        if (i < 0 || i > arraysize) {
+        if (i < 0 || i > arraysize-1) {
             System.out.println("Invalid index");
-        } else {
+        }
+        else {
             int temp;
             if (newk < array[i]) {
                 array[i] = newk;
@@ -142,7 +140,7 @@ public class MinBinaryheap {
         }
     }
 
-    public static MinBinaryheap merge(MinBinaryheap heap1, MinBinaryheap heap2) {
+    public static MinBinaryheap merge (MinBinaryheap heap1, MinBinaryheap heap2) {
 
         int newSize = heap1.getHeapsize() + heap2.getHeapsize();
         MinBinaryheap mergeHeap = new MinBinaryheap(newSize);
