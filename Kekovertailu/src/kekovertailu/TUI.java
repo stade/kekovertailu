@@ -6,12 +6,14 @@
 package kekovertailu;
 import java.util.Scanner;
 /**
+ * Class TUI handles the text userinterface of heapcomparing
  *
  * @author Tatu Tahvanainen
  */
-
-//Class TUI handles the text userinterface of heapcomparing
 public class TUI {
+
+    final int MAX_VALUE_KEYS = 1000000;
+    final int MAX_VALUE_TIMES = 1000000;
 
     public void start() {
 
@@ -34,7 +36,7 @@ public class TUI {
             System.out.println("1. Inserting a key ");
             System.out.println("2. Finding min key");
             System.out.println("3. Deleting minimun key");
-            System.out.println("4. Degreasing key");
+            System.out.println("4. Decreasing key");
             System.out.println("5. Merge/Union of heaps");
             System.out.println("0. Exit");
             System.out.println("----------------------------------------");
@@ -48,7 +50,7 @@ public class TUI {
                         case 1: insertMenu(); ready = true; break;
                         case 2: findMinMenu(); ready = true; break;
                         case 3: deleteMinMenu(); ready = true; break;
-                        case 4: degreaseKeyMenu(); ready = true; break;
+                        case 4: decreaseKeyMenu(); ready = true; break;
                         case 5: mergeMenu(); ready = true; break;
                         case 0: stop = true; ready = true; break;
                         default: break;
@@ -72,18 +74,31 @@ public class TUI {
     private void insertMenu() {
         int numKeys = 0;
         int testTimes = 0;
-        Scanner input;
+        boolean ready = false;
+        Scanner input = new Scanner(System.in);
 
         System.out.println("----------------------------------------");
-        System.out.println("Please select the number of keys to be inserted (10-1000000");
+        System.out.println("Please select the number of keys to be inserted (10-" + MAX_VALUE_KEYS + ")");
 
-        input = new Scanner(System.in);
-        numKeys = checkInput(input);
+        while (!ready) {
+            input = new Scanner(System.in);
+            numKeys = checkInput(input);
 
-        System.out.println("Please select the number of times to run the comparing");
+            if (10 <= numKeys && numKeys <= MAX_VALUE_KEYS) {
+                ready = true;
+            }
+        }
+        System.out.println("Please select the number of times to run the comparing (1-" + MAX_VALUE_TIMES + ")");
+        ready = false;
+        
+        while (!ready) {
+            input = new Scanner(System.in);
+            testTimes = checkInput(input);
 
-        input = new Scanner(System.in);
-        testTimes = checkInput(input);
+            if(1 <= testTimes && testTimes <= MAX_VALUE_TIMES) {
+                ready = true;
+            }
+        }
 
         ComparingHeaps.insert(numKeys,testTimes);
         System.out.println("Press enter to return main menu");
@@ -91,74 +106,153 @@ public class TUI {
       
     }
     private void findMinMenu() {
-        ComparingHeaps.findmin();
+        int numKeys = 0;
+        int testTimes = 0;
+        boolean ready = false;
+        Scanner input = new Scanner(System.in);
+
+        System.out.println("----------------------------------------");
+        System.out.println("Please select the number of keys to be inserted (10-" + MAX_VALUE_KEYS + ")");
+
+        while (!ready) {
+            input = new Scanner(System.in);
+            numKeys = checkInput(input);
+
+            if (10 <= numKeys && numKeys <= MAX_VALUE_KEYS) {
+                ready = true;
+            }
+        }
+        System.out.println("Please select the number of times to run the comparing (1-" + MAX_VALUE_TIMES + ")");
+        ready = false;
+
+        while (!ready) {
+            input = new Scanner(System.in);
+            testTimes = checkInput(input);
+
+            if(1 <= testTimes && testTimes <= MAX_VALUE_TIMES) {
+                ready = true;
+            }
+        }
+        ComparingHeaps.findmin(numKeys, testTimes);
         System.out.println("Press enter to return main menu");
+        input.nextLine();
     }
    
     private void deleteMinMenu() {
         int numKeys = 0;
         int testTimes = 0;
-        Scanner input;
+        boolean ready = false;
+        Scanner input = new Scanner(System.in);
 
         System.out.println("----------------------------------------");
-        System.out.println("Please select the number of keys to be inserted (10-1000000");
+        System.out.println("Please select the number of keys to be inserted (10-" + MAX_VALUE_KEYS + ")");
 
-        input = new Scanner(System.in);
-        numKeys = checkInput(input);
+        while (!ready) {
+            input = new Scanner(System.in);
+            numKeys = checkInput(input);
 
-        System.out.println("Please select the number of times to run the comparing");
+            if (10 <= numKeys && numKeys <= MAX_VALUE_KEYS) {
+                ready = true;
+            }
+        }
 
-        input = new Scanner(System.in);
-        testTimes = checkInput(input);
+        System.out.println("Please select the number of times to run the comparing (1-" + MAX_VALUE_TIMES + ")");
+        ready = false;
+
+        while (!ready) {
+            input = new Scanner(System.in);
+            testTimes = checkInput(input);
+
+            if (1 <= testTimes && testTimes <= MAX_VALUE_TIMES) {
+                ready = true;
+            }
+        }
 
         ComparingHeaps.deleteMin(numKeys,testTimes);
         System.out.println("Press enter to return main menu");
         input.nextLine();
     }
-    private void degreaseKeyMenu() {
+    private void decreaseKeyMenu() {
         int numKeys = 0;
         int testTimes = 0;
-        int degreaseCount = 0;
-        Scanner input;
+        int decreaseCount = 0;
+        boolean ready = false;
+        Scanner input = new Scanner(System.in);
 
         System.out.println("----------------------------------------");
-        System.out.println("Please select the number of keys to be inserted (10-1000000");
+        System.out.println("Please select the number of keys to be inserted (10-" + MAX_VALUE_KEYS + ")");
 
-        input = new Scanner(System.in);
-        numKeys = checkInput(input);
+         while (!ready) {
+            input = new Scanner(System.in);
+            numKeys = checkInput(input);
 
-        System.out.println("Please select the number of times to run the comparing");
+            if (10 <= numKeys && numKeys <= MAX_VALUE_KEYS) {
+                ready = true;
+            }
+        }
 
-        input = new Scanner(System.in);
-        testTimes = checkInput(input);
+        System.out.println("Please select the number of times to run the comparing (1-" + MAX_VALUE_TIMES + ")");
+        ready = false;
 
-        System.out.println("Please select the number of times that degreasing key is done");
+        while (!ready) {
+            input = new Scanner(System.in);
+            testTimes = checkInput(input);
 
-        input = new Scanner(System.in);
-        degreaseCount = checkInput(input);
+            if (1 <= testTimes && testTimes <= MAX_VALUE_TIMES) {
+                ready = true;
+            }
+        }
 
-        ComparingHeaps.degreaseKey(numKeys, testTimes, degreaseCount);
+        System.out.println("Please select the number of times that decreasing key is done (1-" + MAX_VALUE_TIMES + ")");
+        ready = false;
+
+        while (!ready) {
+            input = new Scanner(System.in);
+            decreaseCount = checkInput(input);
+
+            if (1 <= decreaseCount && decreaseCount <= MAX_VALUE_TIMES) {
+                ready = true;
+            }
+        }
+
+        ComparingHeaps.degreaseKey(numKeys, testTimes, decreaseCount);
         System.out.println("Press enter to return main menu");
         input.nextLine();
     }
     private void mergeMenu() {
         int numKeys = 0;
         int testTimes = 0;
-        Scanner input;
+        boolean ready = false;
+        Scanner input = new Scanner(System.in);
+
 
         System.out.println("----------------------------------------");
-        System.out.println("Please select the number of keys to be inserted (10-1000000");
+        System.out.println("Please select the number of keys to be inserted (10-" + MAX_VALUE_KEYS + ")");
 
-        input = new Scanner(System.in);
-        numKeys = checkInput(input);
+        while (!ready) {
+            input = new Scanner(System.in);
+            numKeys = checkInput(input);
 
-        System.out.println("Please select the number of times to run the comparing");
+            if (10 <= numKeys && numKeys <= MAX_VALUE_KEYS) {
+                ready = true;
+            }
+        }
 
-        input = new Scanner(System.in);
-        testTimes = checkInput(input);
+        System.out.println("Please select the number of times to run the comparing (1-" + MAX_VALUE_TIMES + ")");
+        ready = false;
+
+        while (!ready) {
+            input = new Scanner(System.in);
+            testTimes = checkInput(input);
+
+            if (1 <= testTimes && testTimes <= MAX_VALUE_TIMES) {
+                ready = true;
+            }
+        }
 
         ComparingHeaps.merge(numKeys,testTimes);
         System.out.println("Press enter to return main menu");
         input.nextLine();
     }
+
 }

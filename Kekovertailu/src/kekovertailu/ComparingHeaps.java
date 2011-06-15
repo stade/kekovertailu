@@ -32,7 +32,7 @@ public class ComparingHeaps {
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
                 FibonacciNode node = new FibonacciNode(integer);
-                fibHeap.heapInsert(node);
+                fibHeap.insert(node);
             }
 
             end1 = System.currentTimeMillis();
@@ -42,7 +42,7 @@ public class ComparingHeaps {
 
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
-                binHeap.heapInsert(integer);
+                binHeap.insert(integer);
             }
 
             end2 = System.currentTimeMillis();
@@ -66,11 +66,76 @@ public class ComparingHeaps {
         System.out.println("Comparing is done!");
         System.out.println("Average time of inserting " + test + " times to Fibonacci-heap " + totalTime1 / testcount + " milliseconds");
         System.out.println("Average time of inserting " + test + " times to binaryheap " + totalTime2 / testcount + " milliseconds");
-        System.out.println("Average Time of inserting " + test + " times to Java priotyqueue " + totalTime3 / testcount + " milliseconds");
+        System.out.println("Average time of inserting " + test + " times to Java priotyqueue " + totalTime3 / testcount + " milliseconds");
 
     }
 
-    public static void findmin() {
+    public static void findmin(int test, int testcount) {
+         int integer = 0;
+        double start1, start2, start3, end1, end2, end3, totalTime1 = 0, totalTime2 = 0, totalTime3 = 0;
+        Random randomizer = new Random();
+
+        for (int j = testcount; j > 0; j--) {
+
+            System.out.println("Comparing is running!");
+            MinBinaryheap binHeap = new MinBinaryheap(test);
+            FibonacciHeap fibHeap = new FibonacciHeap();
+            PriorityQueue<Integer> javaHeap = new PriorityQueue<Integer>();
+
+            for (int i = test; i > 0; i--) {
+                integer = randomizer.nextInt(i);
+                FibonacciNode node = new FibonacciNode(integer);
+                fibHeap.insert(node);
+            }
+            for (int i = test; i > 0; i--) {
+                integer = randomizer.nextInt(i);
+                binHeap.insert(integer);
+            }
+            for (int i = test; i > 0; i--) {
+                integer = randomizer.nextInt(i);
+                javaHeap.add(integer);
+            }
+
+            System.gc();
+            System.gc();
+
+            start1 = System.currentTimeMillis();
+
+            for (int i = 0; i < test; i++) {
+                fibHeap.min();
+            }
+
+            end1 = System.currentTimeMillis();
+            System.gc();
+            System.gc();
+            start2 = System.currentTimeMillis();
+
+            for (int i = 0; i < test; i++) {
+                binHeap.heapMin();
+            }
+
+            end2 = System.currentTimeMillis();
+            System.gc();
+            System.gc();
+            start3 = System.currentTimeMillis();
+
+            for (int i = test - 1; i >= 0; i--) {
+                javaHeap.peek();
+            }
+
+            end3 = System.currentTimeMillis();
+
+            totalTime1 = totalTime1 + (end1 - start1);
+            totalTime2 = totalTime2 + (end2 - start2);
+            totalTime3 = totalTime3 + (end3 - start3);
+
+        }
+        System.out.println("Comparing is done!");
+        System.out.println("Average time of finding min " + test + " times from Fibonacci-heap " + totalTime1/testcount + " milliseconds");
+        System.out.println("Average time of finding min " + test + " times from binaryheap " + totalTime2/testcount + " milliseconds");
+        System.out.println("Average time of finding min " + test + " times from Java priorityqueue " + totalTime3/testcount + " milliseconds");
+
+
     }
 
     public static void deleteMin(int test, int testcount) {
@@ -85,15 +150,14 @@ public class ComparingHeaps {
             FibonacciHeap fibHeap = new FibonacciHeap();
             PriorityQueue<Integer> javaHeap = new PriorityQueue<Integer>();
 
-            // TODO: check that test runs correct mount of times
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
                 FibonacciNode node = new FibonacciNode(integer);
-                fibHeap.heapInsert(node);
+                fibHeap.insert(node);
             }
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
-                binHeap.heapInsert(integer);
+                binHeap.insert(integer);
             }
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
@@ -106,7 +170,7 @@ public class ComparingHeaps {
             start1 = System.currentTimeMillis();
 
             for (int i = 0; i < test; i++) {
-                fibHeap.heapDeleteMin();
+                fibHeap.deleteMin();
                 
             }
 
@@ -116,7 +180,7 @@ public class ComparingHeaps {
             start2 = System.currentTimeMillis();
 
             for (int i = 0; i < test; i++) {
-                binHeap.heapDelMin();
+                binHeap.delMin();
             }
 
             end2 = System.currentTimeMillis();
@@ -143,7 +207,7 @@ public class ComparingHeaps {
     }
 
     public static void degreaseKey(int test,int testcount, int degreasecount) {
-        int integer = 0, k = 0, key = 0;
+        int integer = 0, key = 0;
         long start1, start2, end1, end2, totalTime1 = 0, totalTime2 = 0;
         Random randomizer = new Random();
         int pseudoRandomIndex = test/2;
@@ -152,13 +216,11 @@ public class ComparingHeaps {
         MinBinaryheap binHeap = new MinBinaryheap(test);
         FibonacciHeap fibHeap = new FibonacciHeap();
         
-
-        // TODO: check that test runs correct mount of times
         for (int i = test; i > 0; i--) {
-            k++;
+
             integer = randomizer.nextInt(i);
             node = new FibonacciNode(integer);
-            fibHeap.heapInsert(node);
+            fibHeap.insert(node);
 
             if(i == test/2) {
                 pseudoRandomNode = node;
@@ -167,13 +229,11 @@ public class ComparingHeaps {
         }
         for (int i = test; i > 0; i--) {
             integer = randomizer.nextInt(i);
-            binHeap.heapInsert(integer);
+            binHeap.insert(integer);
         }
 
         System.gc();
         System.gc();
-
-        System.out.println("k =" + k);
 
         for (int l = testcount; l > 0; l--) {
 
@@ -188,7 +248,7 @@ public class ComparingHeaps {
 
                 key = key--;
 
-                fibHeap.heapDecKey(pseudoRandomNode, key);
+                fibHeap.decKey(pseudoRandomNode, key);
             }
 
             end1 = System.nanoTime();
@@ -197,7 +257,7 @@ public class ComparingHeaps {
 
             for (int j = degreasecount; j > 0; j--) {
 
-                binHeap.heapDecKey(pseudoRandomIndex,pseudoRandomIndex);
+                binHeap.decKey(pseudoRandomIndex,pseudoRandomIndex);
             }
 
             end2 = System.nanoTime();
@@ -230,25 +290,24 @@ public class ComparingHeaps {
             MinBinaryheap binHeap3 = new MinBinaryheap(test*2);
             FibonacciHeap fibHeap3 = new FibonacciHeap();
 
-            // TODO: check that test runs correct mount of times
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
                 FibonacciNode node = new FibonacciNode(integer);
-                fibHeap1.heapInsert(node);
+                fibHeap1.insert(node);
             }
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
-                binHeap1.heapInsert(integer);
+                binHeap1.insert(integer);
             }
 
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
                 FibonacciNode node = new FibonacciNode(integer);
-                fibHeap2.heapInsert(node);
+                fibHeap2.insert(node);
             }
             for (int i = test; i > 0; i--) {
                 integer = randomizer.nextInt(i);
-                binHeap2.heapInsert(integer);
+                binHeap2.insert(integer);
             }
 
             System.gc();
@@ -257,7 +316,7 @@ public class ComparingHeaps {
 
             start1 = System.nanoTime();
 
-            fibHeap3 = FibonacciHeap.heapUnion(fibHeap1, fibHeap2);
+            fibHeap3 = FibonacciHeap.merge(fibHeap1, fibHeap2);
 
             end1 = System.nanoTime();
 
