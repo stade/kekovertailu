@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author tatutahv
+ * @author Tatu Tahvanainen
  */
 public class FibonacciHeapTest {
 
