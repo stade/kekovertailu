@@ -126,20 +126,7 @@ public class MinBinaryheap {
             }
         }
     }
-
-    public void heapPrint() {
-
-        int i = 0;
-
-        System.out.print("Contents of heap ");
-
-        while (i <= heapsize - 1) {
-
-            System.out.print(" " + array[i] + " ");
-            i++;
-        }
-    }
-
+    
     public static MinBinaryheap merge (MinBinaryheap heap1, MinBinaryheap heap2) {
 
         int newSize = heap1.getHeapsize() + heap2.getHeapsize();

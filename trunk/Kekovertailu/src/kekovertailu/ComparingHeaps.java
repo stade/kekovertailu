@@ -8,8 +8,7 @@ import java.util.*;
  *
  * @author Tatu Tahvanainen
  */
-
-//TODO: randomizer out of calculating time.
+//TODO: check that comparing runs correct mount of times.
 public class ComparingHeaps {
     // Compares insert method of binaryheap, Fibonacciheap and Java's prioryqueue
     public static void insert(int test, int testcount) {
@@ -23,15 +22,20 @@ public class ComparingHeaps {
             MinBinaryheap binHeap = new MinBinaryheap(test);
             FibonacciHeap fibHeap = new FibonacciHeap();
             PriorityQueue<Integer> javaHeap = new PriorityQueue<Integer>();
+            ArrayList<Integer> randomArray = new ArrayList<Integer>();
 
+            for (int i = test; i > 0; i--) {
+                integer = randomizer.nextInt(i);
+                randomArray.add(integer);
+            }
+            
             System.gc();
             System.gc();
 
             start1 = System.currentTimeMillis();
 
-            for (int i = test; i > 0; i--) {
-                integer = randomizer.nextInt(i);
-                FibonacciNode node = new FibonacciNode(integer);
+            for (int i = 0; i < test; i++) {
+                FibonacciNode node = new FibonacciNode(randomArray.get(i));
                 fibHeap.insert(node);
             }
 
@@ -40,9 +44,8 @@ public class ComparingHeaps {
             System.gc();
             start2 = System.currentTimeMillis();
 
-            for (int i = test; i > 0; i--) {
-                integer = randomizer.nextInt(i);
-                binHeap.insert(integer);
+            for (int i = 0; i < test; i++) {
+                binHeap.insert(randomArray.get(i));
             }
 
             end2 = System.currentTimeMillis();
@@ -50,9 +53,8 @@ public class ComparingHeaps {
             System.gc();
             start3 = System.currentTimeMillis();
 
-            for (int i = test; i > 0; i--) {
-                integer = randomizer.nextInt(i);
-                javaHeap.add(integer);
+            for (int i = 0; i < test; i++) {
+                javaHeap.add(randomArray.get(i));
             }
 
             end3 = System.currentTimeMillis();
@@ -74,6 +76,7 @@ public class ComparingHeaps {
          int integer = 0;
         double start1, start2, start3, end1, end2, end3, totalTime1 = 0, totalTime2 = 0, totalTime3 = 0;
         Random randomizer = new Random();
+
 
         for (int j = testcount; j > 0; j--) {
 
@@ -206,36 +209,43 @@ public class ComparingHeaps {
 
     }
     // Compares decrease key method of binaryheap and Fibonacciheap
-    // TODO: FIX
     public static void decreaseKey(int test,int testcount, int decreasecount) {
         int integer = 0, key = 0;
         long start1, start2, end1, end2, totalTime1 = 0, totalTime2 = 0;
+
         Random randomizer = new Random();
         int pseudoRandomIndex = test-1;
         FibonacciNode pseudoRandomNode = null;
         FibonacciNode node;
         MinBinaryheap binHeap = new MinBinaryheap(test);
         FibonacciHeap fibHeap = new FibonacciHeap();
-        
-        for (int i = test+1; i > 0; i--) {
-            integer = randomizer.nextInt(i);
-            node = new FibonacciNode(integer);
-            fibHeap.insert(node);
-
-            if(i == test-2) {
-                pseudoRandomNode = node;
-            }
-        }
-
-        for (int i = test; i > 0; i--) {
-            integer = randomizer.nextInt(i);
-            binHeap.insert(integer);
-        }
-
-        System.gc();
-        System.gc();
+        ArrayList<Integer> randomArray = new ArrayList<Integer>();
 
         for (int l = testcount; l > 0; l--) {
+
+            pseudoRandomIndex = test-1;
+        
+            for (int i = test; i > 0; i--) {
+                integer = randomizer.nextInt(i);
+                randomArray.add(integer);
+            }
+            
+            
+            for (int i = 0; i < test; i++)  {
+                node = new FibonacciNode(randomArray.get(i));
+                fibHeap.insert(node);
+                if(i == test-1) {
+                    pseudoRandomNode = node;
+                }
+            }
+
+            for (int i = 0; i > test; i++) {
+                binHeap.insert(randomArray.get(i));
+
+            }
+
+            System.gc();
+            System.gc();
 
             System.out.println("Comparing is running!");
 
@@ -257,9 +267,6 @@ public class ComparingHeaps {
             start2 = System.nanoTime();
 
             for (int j = decreasecount; j > 0; j--) {
-
-                System.out.println(pseudoRandomIndex);
-
                 binHeap.decKey(pseudoRandomIndex,pseudoRandomIndex--);
             }
 
