@@ -1,15 +1,11 @@
 package kekovertailu;
 
 /**
+ *  This class implements datastructure known as Fibonacciheap
  *
- * @author tatutahv
- *
- * This class implements datastructure known as Fibonacciheap
+ * @author Tatu Tahvanainen
  */
 public class FibonacciHeap {
-
-    //private static final double oneOverLogPhi =
-        //1.0 / Math.log((1.0 + Math.sqrt(5.0)) / 2.0);
 
     private FibonacciNode min;
     private int numNodes;
@@ -57,7 +53,7 @@ public class FibonacciHeap {
                 temp.setRight(node);
 
             }
-            // If node is smaller than min it becames min
+            // If nodes key is smaller than min it becames min
             if (node.getKey() < min.getKey()) {
 
                 min = node;
@@ -261,7 +257,7 @@ public class FibonacciHeap {
             System.out.println("num of nodes: " + numNodes);
         }
 
-        // Degree array size is the max degree of heaps in rootlist
+        // Degree arrays size is the max degree of heaps in rootlist
         FibonacciNode[] degreeArray = new FibonacciNode[maxDegree];
 
         // Set every reference to point null

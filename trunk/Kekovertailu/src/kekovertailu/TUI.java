@@ -3,29 +3,29 @@ package kekovertailu;
 
 import java.util.Scanner;
 /**
- * Class TUI handles the text userinterface of heapcomparison
- *
+ * Class TUI handles the text-user-interface of heapcomparison
+ 
  * @author Tatu Tahvanainen
  */
 public class TUI {
 
-    final int MAX_VALUE_KEYS = 1000000;
-    final int MAX_VALUE_TIMES = 1000000;
+    final static int MAX_VALUE_KEYS = 1000000;
+    final static int MAX_VALUE_TIMES = 1000000;
 
-    public void start() {
+    public static void start() {
 
-        mainMenu();
+        TUI.mainMenu();
     }
-    private void mainMenu() {
+    private static void mainMenu() {
 
         Scanner input;
         boolean ready,stop = false;
-        int choise = 0;
+        int choice = 0;
 
         while (!stop) {
 
             ready = false;
-            choise = 0;
+            choice = 0;
 
             System.out.println("----- Welcome to Heap comparison! -----");
             System.out.println("Please select a heap method to be compared (0-5)");
@@ -41,9 +41,9 @@ public class TUI {
             
             while(!ready) {
                 input = new Scanner(System.in);
-                choise = checkInput(input);
-                if (0 <= choise && choise <= 5) {
-                    switch (choise) {
+                choice = checkInput(input);
+                if (0 <= choice && choice <= 5) {
+                    switch (choice) {
                         case 1: insertMenu(); ready = true; break;
                         case 2: findMinMenu(); ready = true; break;
                         case 3: deleteMinMenu(); ready = true; break;
@@ -56,7 +56,7 @@ public class TUI {
             }
         }
    }
-   private int checkInput(Scanner input) {
+   private static int checkInput(Scanner input) {
         System.out.println("Input: ");
         input = new Scanner(System.in);
 
@@ -68,7 +68,7 @@ public class TUI {
         return input.nextInt();
     }
 
-    private void insertMenu() {
+    private static void insertMenu() {
         int numKeys = 0;
         int testTimes = 0;
         boolean ready = false;
@@ -102,7 +102,7 @@ public class TUI {
         input.nextLine();
       
     }
-    private void findMinMenu() {
+    private static void findMinMenu() {
         int numKeys = 0;
         int testTimes = 0;
         boolean ready = false;
@@ -135,7 +135,7 @@ public class TUI {
         input.nextLine();
     }
    
-    private void deleteMinMenu() {
+    private static void deleteMinMenu() {
         int numKeys = 0;
         int testTimes = 0;
         boolean ready = false;
@@ -169,7 +169,7 @@ public class TUI {
         System.out.println("Press enter to return main menu");
         input.nextLine();
     }
-    private void decreaseKeyMenu() {
+    private static void decreaseKeyMenu() {
         int numKeys = 0;
         int testTimes = 0;
         int decreaseCount = 0;
@@ -200,14 +200,14 @@ public class TUI {
             }
         }
 
-        System.out.println("Please select the number of times that decreasing key is done (1-" + MAX_VALUE_TIMES + ")");
+        System.out.println("Please select the number of times that decreasing key is done (1-" + numKeys + ")");
         ready = false;
 
         while (!ready) {
             input = new Scanner(System.in);
             decreaseCount = checkInput(input);
 
-            if (1 <= decreaseCount && decreaseCount <= MAX_VALUE_TIMES) {
+            if (1 <= decreaseCount && decreaseCount <= numKeys) {
                 ready = true;
             }
         }
@@ -216,7 +216,7 @@ public class TUI {
         System.out.println("Press enter to return main menu");
         input.nextLine();
     }
-    private void mergeMenu() {
+    private static void mergeMenu() {
         int numKeys = 0;
         int testTimes = 0;
         boolean ready = false;
@@ -251,5 +251,4 @@ public class TUI {
         System.out.println("Press enter to return main menu");
         input.nextLine();
     }
-
 }

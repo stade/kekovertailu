@@ -2,10 +2,10 @@
 package kekovertailu;
 
 /**
- *
- * @author tatutahv
- *
  * This class implements datastructure known as minimum binaryheap.
+ *
+ * @author Tatu Tahvanainen
+ *
  */
 public class MinBinaryheap {
 

@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author tatutahv
+ * @author Tatu Tahvanainen
  */
 public class MinBinaryheapTest {
 
@@ -37,7 +37,7 @@ public class MinBinaryheapTest {
 
     }
     /**
-     * Test of heapMin method, of class MinBinaryheap.
+     * Test of Min method, of class MinBinaryheap.
      */
     @Test
     public void testMin() {
@@ -54,7 +54,7 @@ public class MinBinaryheapTest {
     }
 
     /**
-     * Test of heapInsert method, of class MinBinaryheap.
+     * Test of Insert method, of class MinBinaryheap.
      */
     @Test
     public void testInsert() {
@@ -70,7 +70,7 @@ public class MinBinaryheapTest {
     }
 
     /**
-     * Test of heapDelMin method, of class MinBinaryheap.
+     * Test of DelMin method, of class MinBinaryheap.
      */
     @Test
     public void testDelMin() {
@@ -88,7 +88,7 @@ public class MinBinaryheapTest {
     }
 
     /**
-     * Test of heapDecKey method, of class MinBinaryheap.
+     * Test of DecKey method, of class MinBinaryheap.
      */
     @Test
     public void testDecKey() {
@@ -105,7 +105,7 @@ public class MinBinaryheapTest {
 
     }
     /**
-     * Test of heapDecKey method, of class MinBinaryheap.
+     * Test of DecKey method, of class MinBinaryheap.
      */
     @Test
     public void testMerge() {
@@ -157,7 +157,6 @@ public class MinBinaryheapTest {
             res = missing.remove(0);
             System.out.println("Missing " + res);
         }
-        assertTrue(missing.isEmpty());
-        
+        assertTrue(missing.isEmpty()); 
     }
 }

@@ -4,9 +4,12 @@ package kekovertailu;
 import java.util.*;
 
 /**
+ * Class ComparingHeaps handless comparing of heaps.
  *
  * @author Tatu Tahvanainen
  */
+
+//TODO: randomizer out of calculating time.
 public class ComparingHeaps {
     // Compares insert method of binaryheap, Fibonacciheap and Java's prioryqueue
     public static void insert(int test, int testcount) {
@@ -203,7 +206,8 @@ public class ComparingHeaps {
 
     }
     // Compares decrease key method of binaryheap and Fibonacciheap
-    public static void decreaseKey(int test,int testcount, int degreasecount) {
+    // TODO: FIX
+    public static void decreaseKey(int test,int testcount, int decreasecount) {
         int integer = 0, key = 0;
         long start1, start2, end1, end2, totalTime1 = 0, totalTime2 = 0;
         Random randomizer = new Random();
@@ -214,7 +218,6 @@ public class ComparingHeaps {
         FibonacciHeap fibHeap = new FibonacciHeap();
         
         for (int i = test+1; i > 0; i--) {
-
             integer = randomizer.nextInt(i);
             node = new FibonacciNode(integer);
             fibHeap.insert(node);
@@ -222,10 +225,7 @@ public class ComparingHeaps {
             if(i == test-2) {
                 pseudoRandomNode = node;
             }
-
         }
-
-        fibHeap.deleteMin();
 
         for (int i = test; i > 0; i--) {
             integer = randomizer.nextInt(i);
@@ -241,15 +241,12 @@ public class ComparingHeaps {
 
             start1 = System.nanoTime();
 
-            for (int j = degreasecount; j > 0; j--) {
-
-                fibHeap.deleteMin();
+            for (int j = decreasecount; j > 0; j--) {
                 
                 key = pseudoRandomNode.getKey();
-
                 key = key--;
-
                 fibHeap.decKey(pseudoRandomNode, key);
+                
             }
 
             end1 = System.nanoTime();
@@ -259,7 +256,10 @@ public class ComparingHeaps {
 
             start2 = System.nanoTime();
 
-            for (int j = degreasecount; j > 0; j--) {
+            for (int j = decreasecount; j > 0; j--) {
+
+                System.out.println(pseudoRandomIndex);
+
                 binHeap.decKey(pseudoRandomIndex,pseudoRandomIndex--);
             }
 
@@ -271,8 +271,8 @@ public class ComparingHeaps {
         }
 
         System.out.println("Comparing is done!");
-        System.out.println("Average time of degreasing a key " + degreasecount + " times in Fibonacci-heap " + totalTime1/testcount + " nanoseconds");
-        System.out.println("Average time of degreasing a key " + degreasecount + " times in binaryheap " + totalTime2/testcount + " nanoseconds");
+        System.out.println("Average time of decreasing a key " + decreasecount + " times in Fibonacci-heap " + totalTime1/testcount + " nanoseconds");
+        System.out.println("Average time of decreasing a key " + decreasecount + " times in binaryheap " + totalTime2/testcount + " nanoseconds");
         
     }
     // Compares merge method of binaryheap and Fibonacciheap
@@ -316,18 +316,13 @@ public class ComparingHeaps {
             System.gc();
             System.gc();
 
-
             start1 = System.nanoTime();
 
             fibHeap3 = FibonacciHeap.merge(fibHeap1, fibHeap2);
 
             end1 = System.nanoTime();
-
-            System.out.println(start1 + " " + end1);
-
             System.gc();
             System.gc();
-
             start2 = System.nanoTime();
 
             binHeap3 = MinBinaryheap.merge(binHeap1, binHeap2);
@@ -338,7 +333,6 @@ public class ComparingHeaps {
             totalTime2 = totalTime2 + (end2 - start2);
 
         }
-
         System.out.println("Comparing is done!");
         System.out.println("Average time of merging two Fibonacci-heaps with " + test + " nodes  " + totalTime1/testcount + " nanoseconds");
         System.out.println("Average time of merging two minimum binaryheaps with " + test + " nodes " + totalTime2/testcount + " nanoseconds");
