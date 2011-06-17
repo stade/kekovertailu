@@ -48,6 +48,7 @@ public class MinBinaryheap {
         return (2 * i) + 2;
     }
 
+    // When heap is modified minHeapify ensures that minBinaryheap condition stays valid.
     private void minHeapify(int i) {
         int l, r, smallest, temp;
 
@@ -76,10 +77,11 @@ public class MinBinaryheap {
         }
     }
 
+    // Returns put doesn't remove minnode.
     public int heapMin() {
         return array[0];
     }
-
+    // Inserts node to heap
     public void insert(int k) {
         int i = 0;
 
@@ -97,7 +99,7 @@ public class MinBinaryheap {
             array[i] = k;
         }
     }
-
+    // Deletes minnode.
     public int delMin() {
         int min;
 
@@ -107,7 +109,7 @@ public class MinBinaryheap {
         minHeapify(0);
         return min;
     }
-
+    // Decreases key of a node in given index
     public void decKey(int i, int newk) {
 
         if (i < 0 || i > arraysize-1) {
@@ -126,7 +128,7 @@ public class MinBinaryheap {
             }
         }
     }
-    
+    // Merges two minBinaryheaps as one
     public static MinBinaryheap merge (MinBinaryheap heap1, MinBinaryheap heap2) {
 
         int newSize = heap1.getHeapsize() + heap2.getHeapsize();
