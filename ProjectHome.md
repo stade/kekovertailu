@@ -1,0 +1,1 @@
+Helsingin yliopiston tietojenkäsittelytieteen laitoksen tietorakenteiden harjoitustyö, jossa vertaillaan kekojen tehokkuutta.
